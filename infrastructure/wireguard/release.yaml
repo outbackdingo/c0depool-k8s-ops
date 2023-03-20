@@ -29,8 +29,10 @@ spec:
     probes:
       liveness:
         enabled: false
-    secret:
-      wireguard-config: "${WIREGUARD_CONFIG}"        
+    secrets:
+      wireguard-config:
+        enabled: true
+        stringData: "${WIREGUARD_CONFIG}"
     persistence:
       config:
         enabled: true
