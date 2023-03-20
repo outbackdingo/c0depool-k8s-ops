@@ -29,6 +29,8 @@ spec:
     probes:
       liveness:
         enabled: false
+    secret:
+      wireguard-config: "${WIREGUARD_CONFIG}"        
     persistence:
       config:
         enabled: true
@@ -39,6 +41,4 @@ spec:
         volumeSpec:
           secret:
             defaultMode: 0600
-            secretName: wireguard-config      
-    secret:
-      wireguard-config: "${WIREGUARD_CONFIG}"
+            secretName: wireguard-config
