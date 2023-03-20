@@ -33,7 +33,8 @@ spec:
       config:
         enabled: true
         stringData: 
-          wg0.conf: "${WIREGUARD_CONFIG}"
+          wg0.conf: |
+            ${WIREGUARD_CONFIG}
     persistence:
       config:
         enabled: true
