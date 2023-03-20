@@ -54,10 +54,5 @@ spec:
         tls: 
           - secretName: "${CERT_SECRET_NAME}"
             hosts:
-            - *host       
-  valuesFrom:
-    - kind: Secret
-      name: jellyfin-secrets
-      valuesKey: jellyfin-secrets.yaml
-      optional: true    
+            - *host  
       
