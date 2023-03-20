@@ -1,0 +1,48 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  releaseName: ingress-nginx
+  chart:
+    spec:
+      chart: ingress-nginx
+      version: "4.5.2"
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx
+        namespace: flux-system
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    controller:
+      name: controller
+      image:
+        registry: registry.k8s.io
+        image: ingress-nginx/controller
+        tag: "v1.6.4"
+      config:
+        use-forwarded-headers: 'true'
+        custom-http-errors: >-
+          401,403,404,500,501,502,503
+      externalTrafficPolicy: "Local"
+      kind: DaemonSet
+    defaultBackend:
+      enabled: true
+      image:
+        repository: ghcr.io/tarampampam/error-pages
+        tag: 2.20.0
+      extraEnvs:
+      - name: TEMPLATE_NAME
+        value: ghost
+      - name: SHOW_DETAILS
+        value: 'false'
+    tcp:
+      "53": "adguard-home/adguard-home-dns-tcp:53"
+      "853": "adguard-home/adguard-home-dns-tls:853"
+    udp:
+      "53": "adguard-home/adguard-home-dns-udp:53"
+      "50000": "wireguard/wg-easy-wg:50000"

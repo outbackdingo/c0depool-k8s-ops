@@ -1,0 +1,51 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: photoprism
+  namespace: photoprism
+spec:
+  chart:
+    spec:
+      version: ">=1.0.0"
+  values:
+    image:
+      repository: photoprism/photoprism
+      tag: 221118-arm64
+      pullPolicy: IfNotPresent
+    env:
+      TZ: Asia/Kolkata
+      PHOTOPRISM_STORAGE_PATH: /photoprism/storage
+      PHOTOPRISM_ORIGINALS_PATH: /photoprism/originals
+      PHOTOPRISM_PUBLIC: "false"
+      PHOTOPRISM_DATABASE_DRIVER: mysql
+      PHOTOPRISM_DATABASE_SERVER: mariadb.databases.svc.cluster.local:3306
+      PHOTOPRISM_DATABASE_NAME: photoprism
+    persistence:
+      config:
+        enabled: true
+        mountPath: /photoprism/storage
+        storageClass: longhorn
+        size: 20Gi
+      originals:
+        enabled: true
+        type: nfs
+        server: 192.168.0.120
+        path: /data/media/Photos/
+        accessMode: ReadWriteOnce
+    mariadb:
+      enabled: false
+    nodeSelector:
+      kubernetes.io/role: worker
+    #resources: 
+    #  limits:
+    #    cpu: 700m
+    #    memory: 1.5Gi
+    #  requests:
+    #    cpu: 300m
+    #    memory: 1Gi
+  valuesFrom:
+    - kind: Secret
+      name: photoprism-secrets
+      valuesKey: photoprism-secrets.yaml
+      optional: true    
+      

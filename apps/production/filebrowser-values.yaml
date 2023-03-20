@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: filebrowser
+  namespace: filebrowser
+spec:
+  chart:
+    spec:
+      version: ">=1.0.0"
+  values:
+    image:
+      repository: filebrowser/filebrowser   
+      tag: v2.23.0      
+      pullPolicy: IfNotPresent
+    env:
+      TZ: Asia/Kolkata 
+    persistence:
+      config:
+        enabled: true
+        mountpath: /config
+        storageClass: longhorn
+      data:
+        enabled: true
+        mountPath: /srv
+        type: nfs
+        server: 192.168.0.120
+        path: /data/media/
+        accessMode: ReadWriteOnce
+  valuesFrom:
+    - kind: Secret
+      name: filebrowser-secrets
+      valuesKey: filebrowser-secrets.yaml
+      optional: true

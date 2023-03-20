@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.codepool.service: mariadb
+  name: mariadb
+  namespace: databases
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.codepool.service: mariadb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.codepool.service: mariadb
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secrets
+                  key: root-password
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+          image: mariadb:10.10.2
+          name: mariadb
+          args: ["--transaction-isolation=READ-COMMITTED", "--binlog-format=ROW", "--skip-innodb-read-only-compressed"]
+          ports:
+            - containerPort: 3306
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mariadb-storage
+      restartPolicy: Always
+      volumes:
+        - name: mariadb-storage
+          persistentVolumeClaim:
+            claimName: mariadb-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-pvc
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

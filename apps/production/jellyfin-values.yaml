@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  chart:
+    spec:
+      version: "1.3.2"
+  values:
+    image:
+      repository: jellyfin/jellyfin
+      tag: 10.8.9
+      pullPolicy: IfNotPresent  
+    env:
+      TZ: Asia/Kolkata  
+    persistence:
+      config:
+        enabled: true
+        storageClass: longhorn
+      cache:
+        enabled: true
+        mountPath: /cache
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        storageClass: longhorn
+      media:
+        enabled: true
+        type: nfs
+        server: 192.168.0.120
+        path: /data/media
+        accessMode: ReadWriteOnce
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+          nginx.ingress.kubernetes.io/rewrite-target: /$1 
+        hosts:
+          - 
+            host: &host "jellyfin.${PUBLIC_DOMAIN}"
+            paths:
+              -
+                path: /(.*)
+                pathType: Prefix
+                service:            
+                  name: jellyfin
+                  port: 8096
+        tls: 
+          - secretName: "${CERT_SECRET_NAME}"
+            hosts:
+            - *host       
+  valuesFrom:
+    - kind: Secret
+      name: jellyfin-secrets
+      valuesKey: jellyfin-secrets.yaml
+      optional: true    
+      
