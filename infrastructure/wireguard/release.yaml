@@ -29,12 +29,6 @@ spec:
     probes:
       liveness:
         enabled: false
-    secrets:
-      config:
-        enabled: true
-        stringData: 
-          wg0.conf: |
-            ${WIREGUARD_CONFIG}
     persistence:
       config:
         enabled: true
