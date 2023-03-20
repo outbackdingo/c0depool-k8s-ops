@@ -13,7 +13,7 @@ spec:
       tag: 10.8.9
       pullPolicy: IfNotPresent  
     env:
-      TZ: Asia/Kolkata  
+      TZ: "${TIMEZONE}"
     service:
       main:
         ports:
