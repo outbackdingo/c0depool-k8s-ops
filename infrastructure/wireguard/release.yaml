@@ -32,7 +32,7 @@ spec:
     secrets:
       wireguard-config:
         enabled: true
-        stringData: "${WIREGUARD_CONFIG}"
+        data: "${WIREGUARD_CONFIG}"
     persistence:
       config:
         enabled: true
