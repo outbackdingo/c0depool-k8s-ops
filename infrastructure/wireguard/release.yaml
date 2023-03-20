@@ -30,9 +30,10 @@ spec:
       liveness:
         enabled: false
     secrets:
-      wireguard-config:
+      config:
         enabled: true
-        data: "${WIREGUARD_CONFIG}"
+        stringData: 
+          wg0.conf: "${WIREGUARD_CONFIG}"
     persistence:
       config:
         enabled: true
