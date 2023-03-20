@@ -36,16 +36,6 @@ spec:
         add:
         - NET_ADMIN
         - SYS_MODULE
-    service:
-      main:
-        enabled: true
-        ports:
-          http:
-            enabled: false
-          vpn:
-            enabled: true
-            port: 51820
-            protocol: UDP
     persistence:
       config:
         enabled: true
