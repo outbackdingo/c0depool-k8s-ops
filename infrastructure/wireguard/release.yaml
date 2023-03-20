@@ -23,12 +23,29 @@ spec:
       tag: v1.0.20210914
     env:
       TZ: "${TIMEZONE}"
+      IPTABLES_BACKEND: nft
+      KILLSWITCH: false
     service:
       main:
         enabled: false
     probes:
       liveness:
         enabled: false
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+        - SYS_MODULE
+    service:
+      main:
+        enabled: true
+        ports:
+          http:
+            enabled: false
+          vpn:
+            enabled: true
+            port: 51820
+            protocol: UDP
     persistence:
       config:
         enabled: true
