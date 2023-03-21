@@ -6,14 +6,19 @@ metadata:
 spec:
   chart:
     spec:
-      version: ">=1.0.0"
+      version: "1.3.2"
   values:
     image:
       repository: filebrowser/filebrowser   
       tag: v2.23.0      
       pullPolicy: IfNotPresent
     env:
-      TZ: Asia/Kolkata 
+      TZ: "${TIMEZONE}"
+    service:
+      main:
+        ports:
+          http:
+            port: 80      
     persistence:
       config:
         enabled: true
@@ -23,12 +28,27 @@ spec:
         enabled: true
         mountPath: /srv
         type: nfs
-        server: 192.168.0.120
+        server: "${NFS_SERVER}"
         path: /data/media/
         accessMode: ReadWriteOnce
-    
-  valuesFrom:
-    - kind: Secret
-      name: filebrowser-secrets
-      valuesKey: filebrowser-secrets.yaml
-      optional: true
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
+          nginx.ingress.kubernetes.io/proxy-body-size: 5120m
+        hosts:
+          - 
+            host: &host "files.${PUBLIC_DOMAIN}"
+            paths:
+              -
+                path: /(.*)
+                pathType: Prefix
+                service:            
+                  name: filebrowser
+                  port: 80
+        tls: 
+          - secretName: "${CERT_SECRET_NAME}"
+            hosts:
+            - *host          
