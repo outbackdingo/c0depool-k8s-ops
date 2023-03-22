@@ -10,8 +10,7 @@ spec:
   values:
     image:
       repository: filebrowser/filebrowser   
-      tag: v2.23.0      
-      pullPolicy: IfNotPresent
+      tag: v2.23.0
     env:
       TZ: "${TIMEZONE}" 
     persistence:

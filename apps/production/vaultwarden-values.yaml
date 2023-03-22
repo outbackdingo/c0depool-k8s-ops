@@ -6,12 +6,16 @@ metadata:
 spec:
   chart:
     spec:
-      version: ">=1.0.0"
+      version: "1.3.2"
   values:
     image:
       repository: vaultwarden/server
-      pullPolicy: IfNotPresent
       tag: 1.27.0
+    strategy:
+      type: Recreate
+    env:
+      DATA_FOLDER: "config"
+      ADMIN_TOKEN: "${VAULTWARDEN_ADMIN_TOKEN}"        
     service:
       main:
         ports:
@@ -24,8 +28,28 @@ spec:
       config:
         enabled: true
         storageClass: longhorn             
-  valuesFrom:
-    - kind: Secret
-      name: vaultwarden-secrets
-      valuesKey: vaultwarden-secrets.yaml
-      optional: true
+    ingress:
+      main:
+        enabled: true
+        annotations: 
+          kubernetes.io/ingress.class: nginx
+          nginx.ingress.kubernetes.io/rewrite-target: /$1
+          nginx.ingress.kubernetes.io/server-snippet: |
+            location ~* "^/admin" {         
+                deny all;
+                return 403;
+              }
+        hosts:
+          - 
+            host: &host "vault.${PUBLIC_DOMAIN}"
+            paths:
+              -
+                path: /(.*)
+                pathType: Prefix
+                service:            
+                  name: vaultwarden
+                  port: 80
+        tls: 
+          - secretName: "${CERT_SECRET_NAME}"
+            hosts:
+            - *host  

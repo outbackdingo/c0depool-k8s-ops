@@ -7,10 +7,10 @@ spec:
   releaseName: photoprism
   chart:
     spec:
-      chart: photoprism
+      chart: app-template
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s
         namespace: flux-system
   interval: 5m
   install:

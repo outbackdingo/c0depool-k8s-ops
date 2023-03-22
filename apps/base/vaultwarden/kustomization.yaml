@@ -4,4 +4,3 @@ namespace: vaultwarden
 resources:
   - namespace.yaml
   - release.yaml
-  - secrets-encrypted.yaml
