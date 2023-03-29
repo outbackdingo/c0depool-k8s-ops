@@ -23,7 +23,7 @@ spec:
         mountPath: /srv
         type: nfs
         server: "${NFS_SERVER}"
-        path: /data/media/
+        path: /mnt/ext-hdd/media/
         accessMode: ReadWriteOnce
     ingress:
       main:
