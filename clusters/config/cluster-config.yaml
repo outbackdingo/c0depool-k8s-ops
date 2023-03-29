@@ -6,5 +6,5 @@ metadata:
   namespace: flux-system
 data:
   TIMEZONE: Asia/Kolkata
-  NFS_SERVER: 192.168.0.120
+  NFS_SERVER: 192.168.0.225
   PHOTOPRISM_DATABASE_SERVER: mariadb.databases.svc.cluster.local:3306
