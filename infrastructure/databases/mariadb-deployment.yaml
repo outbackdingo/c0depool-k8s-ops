@@ -20,10 +20,7 @@ spec:
       containers:
         - env:
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mariadb-secrets
-                  key: root-password
+              value: ${MARIADB_ROOT_PASSWORD}
             - name: PGID
               value: "1000"
             - name: PUID

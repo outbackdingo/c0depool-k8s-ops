@@ -4,6 +4,6 @@ resources:
   - sources
   #- wireguard
   #- wg-easy
-  #- databases
+  - databases
   #- ingress-nginx
   #- netdata
