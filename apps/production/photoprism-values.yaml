@@ -19,6 +19,14 @@ spec:
       PHOTOPRISM_DATABASE_DRIVER: mysql
       PHOTOPRISM_DATABASE_SERVER: "${PHOTOPRISM_DATABASE_SERVER}"
       PHOTOPRISM_DATABASE_NAME: photoprism
+      PHOTOPRISM_ADMIN_PASSWORD: "${PHOTOPRISM_ADMIN_PASSWORD}"
+      PHOTOPRISM_DATABASE_USER: photoprism
+      PHOTOPRISM_DATABASE_PASSWORD: "${PHOTOPRISM_DATABASE_PASSWORD}"
+      PHOTOPRISM_SITE_AUTHOR: "${PHOTOPRISM_SITE_AUTHOR}"
+      PHOTOPRISM_SITE_CAPTION: "Photos by ${PHOTOPRISM_SITE_AUTHOR}"
+      PHOTOPRISM_SITE_DESCRIPTION: "Photos by ${PHOTOPRISM_SITE_AUTHOR}"
+      PHOTOPRISM_SITE_TITLE: "PhotoPrism"
+      PHOTOPRISM_SITE_URL: "https://photos.${PUBLIC_DOMAIN}/"
     service:
       main:
         ports:
@@ -29,12 +37,12 @@ spec:
         enabled: true
         mountPath: /photoprism/storage
         storageClass: longhorn
-        size: 15Gi
+        size: 20Gi
       originals:
         enabled: true
         type: nfs
         server: "${NFS_SERVER}"
-        path: /data/media/Photos/
+        path: /mnt/ext-hdd/media/Photos/
         accessMode: ReadWriteOnce
     ingress:
       main:
