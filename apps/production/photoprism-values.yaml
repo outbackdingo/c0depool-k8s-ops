@@ -10,7 +10,7 @@ spec:
   values:
     image:
       repository: photoprism/photoprism
-      tag: 221118-arm64
+      tag: 221118-jammy
     env:
       TZ: "${TIMEZONE}"
       PHOTOPRISM_STORAGE_PATH: /photoprism/storage
