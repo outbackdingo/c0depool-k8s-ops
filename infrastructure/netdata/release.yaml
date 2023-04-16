@@ -51,15 +51,17 @@ spec:
                 local msg="${host} ${status_message}: ${alarm} ${raised_for}"
                 # map status to emoji
                 case ${status} in
-                    WARNING) EMOJI_ICON="warning";;
-                    CRITICAL) EMOJI_ICON="exclamation";;
-                    CLEAR) EMOJI_ICON="white_check_mark";;
+                  WARNING) EMOJI_ICON="warning" ;;
+                  CRITICAL) EMOJI_ICON="exclamation" ;;
+                  CLEAR) EMOJI_ICON="white_check_mark" ;;
+                  *) emoji="⚪️" ;;
                 esac
                 # map status to priority
                 case ${status} in
-                    WARNING) PRIORITY="high";;
-                    CRITICAL) PRIORITY="urgent";;
-                    CLEAR) PRIORITY="default";;
+                  WARNING) PRIORITY="high" ;;
+                  CRITICAL) PRIORITY="urgent" ;;
+                  CLEAR) PRIORITY="default" ;;
+                  *) priority="default" ;;
                 esac                
                 httpcode=$(docurl -X POST \
                       -u "${NTFY_USERNAME}:${NTFY_PASSWORD}" \
