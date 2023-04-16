@@ -5,5 +5,4 @@ resources:
   - wireguard
   #- wg-easy
   - databases
-  #- ingress-nginx
-  #- netdata
+  - netdata

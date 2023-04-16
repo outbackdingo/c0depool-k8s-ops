@@ -8,6 +8,7 @@ spec:
   chart:
     spec:
       chart: netdata
+      version: "3.7.51"
       sourceRef:
         kind: HelmRepository
         name: netdata
@@ -17,13 +18,19 @@ spec:
     remediation:
       retries: 3
   values:
-    image:
-      repository: netdata/netdata
-      tag: v1.37.1
-    sd:
-      image:
-        repository: netdata/agent-sd
-        tag: v0.2.7
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/whitelist-source-range: "${INGRESS_WHITELIST_COMMON}"
+      path: /
+      pathType: Prefix
+      hosts:
+        - &host "netdata.${PUBLIC_DOMAIN}"
+      tls: 
+        - secretName: "${CERT_SECRET_NAME}"
+          hosts:
+          - *host
     parent:
       database:
         persistence: true
@@ -34,6 +41,41 @@ spec:
         storageclass: "longhorn"
         volumesize: 1Gi
       configs:
+        health:
+          enabled: true
+          path: /etc/netdata/health_alarm_notify.conf
+          data: |
+            SEND_CUSTOM="YES"
+            DEFAULT_RECIPIENT_CUSTOM="https://ntfy.${PUBLIC_DOMAIN}/netdata"
+            custom_sender() {
+                local msg="${host} ${status_message}: ${alarm} ${raised_for}"
+                # map status to emoji
+                case ${status} in
+                    WARNING) EMOJI_ICON="warning";;
+                    CRITICAL) EMOJI_ICON="exclamation";;
+                    CLEAR) EMOJI_ICON="white_check_mark";;
+                esac
+                # map status to priority
+                case ${status} in
+                    WARNING) PRIORITY="high";;
+                    CRITICAL) PRIORITY="urgent";;
+                    CLEAR) PRIORITY="default";;
+                esac                
+                httpcode=$(docurl -X POST \
+                      -u "${NTFY_USERNAME}:${NTFY_PASSWORD}" \
+                      -H "Title: ${name}" \
+                      -H "Priority: ${PRIORITY}" \
+                      -H "Tags: ${EMOJI_ICON}" \
+                      -d "${msg}" \
+                      ${1})
+            
+                if [ "${httpcode}" = "200" ]; then
+                  info "sent custom notification ${msg}"
+                  sent=$((sent + 1))
+                else
+                  error "failed to send custom notification ${msg} with HTTP error code ${httpcode}."
+                fi
+            }      
         netdata:
           enabled: true
           path: /etc/netdata/netdata.conf
@@ -71,9 +113,15 @@ spec:
               to: sysadmin  
       env: 
         DO_NOT_TRACK: 1
+      claiming:
+        enabled: true
+        token: "${NETDATA_TOKEN}"      
     child:
       env: 
         DO_NOT_TRACK: 1
+      claiming:
+        enabled: true
+        token: "${NETDATA_TOKEN}"          
     k8sState:
       persistence:
         enabled: true
@@ -81,8 +129,6 @@ spec:
         volumesize: 1Gi
       env: 
         DO_NOT_TRACK: 1
-  valuesFrom:
-    - kind: Secret
-      name: netdata-secrets
-      valuesKey: netdata-secrets.yaml
-      optional: false  
+      claiming:
+        enabled: true
+        token: "${NETDATA_TOKEN}"        
