@@ -70,12 +70,6 @@ spec:
                       -d "$msg" \
                       $1)
             
-                if [ "$httpcode" = "200" ]; then
-                  info "sent custom notification $msg"
-                  sent=$((sent + 1))
-                else
-                  error "failed to send custom notification $msg with HTTP error code $httpcode."
-                fi
             }      
         netdata:
           enabled: true
