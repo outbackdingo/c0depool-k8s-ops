@@ -48,34 +48,33 @@ spec:
             SEND_CUSTOM="YES"
             DEFAULT_RECIPIENT_CUSTOM="https://ntfy.${PUBLIC_DOMAIN}/netdata"
             custom_sender() {
-                local msg="${host} ${status_message}: ${alarm} ${raised_for}"
+                local msg="$host $status_message: $alarm $raised_for"
                 # map status to emoji
-                case ${status} in
-                  WARNING) EMOJI_ICON="warning" ;;
-                  CRITICAL) EMOJI_ICON="exclamation" ;;
-                  CLEAR) EMOJI_ICON="white_check_mark" ;;
-                  *) emoji="⚪️" ;;
+                case $status in
+                  WARNING) emoji="warning" ;;
+                  CRITICAL) emoji="exclamation" ;;
+                  CLEAR) emoji="white_check_mark" ;;
                 esac
                 # map status to priority
-                case ${status} in
-                  WARNING) PRIORITY="high" ;;
-                  CRITICAL) PRIORITY="urgent" ;;
-                  CLEAR) PRIORITY="default" ;;
+                case $status in
+                  WARNING) priority="high" ;;
+                  CRITICAL) priority="urgent" ;;
+                  CLEAR) priority="default" ;;
                   *) priority="default" ;;
                 esac                
                 httpcode=$(docurl -X POST \
                       -u "${NTFY_USERNAME}:${NTFY_PASSWORD}" \
-                      -H "Title: ${name}" \
-                      -H "Priority: ${PRIORITY}" \
-                      -H "Tags: ${EMOJI_ICON}" \
-                      -d "${msg}" \
-                      ${1})
+                      -H "Title: $name" \
+                      -H "priority: $priority" \
+                      -H "Tags: $emoji" \
+                      -d "$msg" \
+                      $1)
             
-                if [ "${httpcode}" = "200" ]; then
-                  info "sent custom notification ${msg}"
+                if [ "$httpcode" = "200" ]; then
+                  info "sent custom notification $msg"
                   sent=$((sent + 1))
                 else
-                  error "failed to send custom notification ${msg} with HTTP error code ${httpcode}."
+                  error "failed to send custom notification $msg with HTTP error code $httpcode."
                 fi
             }      
         netdata:
