@@ -7,3 +7,4 @@ resources:
   - databases
   - netdata
   - intel-device-plugins-operator
+  - intel-device-plugins-gpu
