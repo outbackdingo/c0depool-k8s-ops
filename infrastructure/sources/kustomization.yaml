@@ -8,3 +8,4 @@ resources:
   - ingress-nginx.yaml
   - wg-easy.yaml
   - bjw-s.yaml
+  - intel.yaml

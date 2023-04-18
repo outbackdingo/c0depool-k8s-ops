@@ -22,17 +22,11 @@ spec:
       config:
         enabled: true
         storageClass: longhorn
-      cache:
-        enabled: true
-        mountPath: /cache
-        accessMode: ReadWriteOnce
-        size: 1Gi
-        storageClass: longhorn
       media:
         enabled: true
         type: nfs
-        server: 192.168.0.120
-        path: /data/media
+        server: "${NFS_SERVER}"
+        path: /mnt/ext-hdd/media/
         accessMode: ReadWriteOnce
     ingress:
       main:

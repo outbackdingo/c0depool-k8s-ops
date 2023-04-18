@@ -6,3 +6,4 @@ resources:
   #- wg-easy
   - databases
   - netdata
+  - intel-device-plugins-operator
