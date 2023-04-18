@@ -5,7 +5,7 @@
   ],
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "flux": {
-    "fileMatch": ["cluster/.+\\.ya?ml$","apps/.+\\.ya?ml$","infrastructure/.+\\.ya?ml$"]
+    "fileMatch": ["cluster/.+\\.ya?ml$"]
   },
   "helm-values": {
     "fileMatch": ["cluster/.+\\.ya?ml$","apps/.+\\.ya?ml$","infrastructure/.+\\.ya?ml$"]
@@ -48,7 +48,7 @@
       "packageNames": [
         "app-template"
       ],
-      "registryUrls": ["https://bjw-s.github.io/helm-charts"]
+      "registryUrls": ["https://bjw-s.github.io/helm-charts/"]
     },
     {
       "datasources": ["helm"],
@@ -64,10 +64,10 @@
       "datasources": ["helm"],
       "managers": ["regex"],
       "packageNames": [
-        "intel-intel-device-plugins-operator",
-        "intel-intel-device-plugins-gpu"
+        "intel-device-plugins-operator",
+        "intel-device-plugins-gpu"
       ],
-      "registryUrls": ["https://intel.github.io/helm-charts"]
+      "registryUrls": ["https://intel.github.io/helm-charts/"]
     }
   ]
 }
