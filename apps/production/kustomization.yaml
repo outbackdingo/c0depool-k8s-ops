@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources: 
-  #- ../base/jellyfin
+  - ../base/jellyfin
   - ../base/filebrowser
   - ../base/vaultwarden
   #- ../base/babybuddy
@@ -9,7 +9,7 @@ resources:
   #- ../base/home-assistant
   #- ../base/plex  
 patchesStrategicMerge: 
-  #- jellyfin-values.yaml
+  - jellyfin-values.yaml
   - filebrowser-values.yaml
   - vaultwarden-values.yaml
   #- babybuddy-values.yaml
