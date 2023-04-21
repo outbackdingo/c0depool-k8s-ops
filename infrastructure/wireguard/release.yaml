@@ -7,11 +7,11 @@ spec:
   releaseName: wireguard
   chart:
     spec:
-      chart: wireguard
-      version: "1.4.2"
+      chart: app-template
+      version: "1.3.2"
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s
         namespace: flux-system
   interval: 5m
   install:
@@ -23,19 +23,19 @@ spec:
       tag: v1.0.20210914
     env:
       TZ: "${TIMEZONE}"
-      #IPTABLES_BACKEND: nft
-      #KILLSWITCH: false
+      IPTABLES_BACKEND: nft
+      KILLSWITCH: false
     service:
       main:
         enabled: false
     probes:
       liveness:
         enabled: false
-    #securityContext:
-    #  capabilities:
-    #    add:
-    #    - NET_ADMIN
-    #    - SYS_MODULE
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+        - SYS_MODULE
     persistence:
       config:
         enabled: true
