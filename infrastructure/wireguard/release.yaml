@@ -32,6 +32,7 @@ spec:
       liveness:
         enabled: false
     securityContext:
+      fsGroup: 1000
       capabilities:
         add:
         - NET_ADMIN
