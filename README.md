@@ -29,7 +29,7 @@ k3s Cluster GitOps managed by Flux, Kustomize, Sops and Renovate. Inspired by pr
     cd c0depool-k8s-ops
     ```
 - Update the repo according to your liking, check apps/ and infrastructure/ and add/remove components. I used [this](https://github.com/fluxcd/flux2-kustomize-helm-example) repo to build the cluster. 
-- Update the .sops.yaml with your age pulic key
+- Update the .sops.yaml with your age public key
 - Create cluster-secrets.yaml similar to clusters/config/cluster-secrets-encrypted.yaml with the values as non-encrypted base64 encoded values.
     ```bash
     # Example
