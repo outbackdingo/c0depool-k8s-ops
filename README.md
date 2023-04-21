@@ -1,6 +1,6 @@
 # c0depool-k8s-ops
 
-k3s Cluster GitOps managed by Flux + Sops.
+k3s Cluster GitOps managed by Flux, Kustomize, Sops and Renovate. Inspired by projects under [k8s-at-home](https://github.com/k8s-at-home).
 
 ## Prerequisites
 
