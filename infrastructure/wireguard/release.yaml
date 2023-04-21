@@ -20,7 +20,8 @@ spec:
   values:
     image:
       repository: ghcr.io/c0depool/wireguard
-      tag: rolling
+      tag: v1.0.20210914
+      pullPolicy: Always
     env:
       TZ: "${TIMEZONE}"
       IPTABLES_BACKEND: nft
