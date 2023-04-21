@@ -7,7 +7,6 @@ spec:
   releaseName: jellyfin
   chart:
     spec:
-      chart: app-template
       sourceRef:
         kind: HelmRepository
         name: bjw-s
