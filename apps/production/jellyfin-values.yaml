@@ -11,7 +11,7 @@ spec:
   values:
     image:
       repository: jellyfin/jellyfin
-      tag: 10.8.9
+      tag: 10.8.10
     env:
       TZ: "${TIMEZONE}"
     service:
