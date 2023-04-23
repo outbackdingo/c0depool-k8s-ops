@@ -37,7 +37,7 @@ spec:
         enabled: true
         mountPath: /photoprism/storage
         storageClass: longhorn
-        size: 20Gi
+        size: 25Gi
       originals:
         enabled: true
         type: nfs
