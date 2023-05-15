@@ -5,5 +5,5 @@ resources:
   - wireguard
   #- wg-easy
   - databases
-  - netdata
+  #- netdata
   - intel-device-plugins
