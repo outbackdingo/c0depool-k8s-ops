@@ -10,7 +10,7 @@ spec:
   values:
     image:
       repository: filebrowser/filebrowser   
-      tag: v2.24.2
+      tag: v2.26.0
     env:
       TZ: "${TIMEZONE}" 
     persistence:
