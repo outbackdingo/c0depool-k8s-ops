@@ -5,7 +5,7 @@ resources:
   - ../base/filebrowser
   - ../base/vaultwarden
   #- ../base/babybuddy
-  - ../base/photoprism
+  # - ../base/photoprism
   #- ../base/home-assistant
   #- ../base/plex  
 patchesStrategicMerge: 
@@ -13,6 +13,6 @@ patchesStrategicMerge:
   - filebrowser-values.yaml
   - vaultwarden-values.yaml
   #- babybuddy-values.yaml
-  - photoprism-values.yaml
+  # - photoprism-values.yaml
   #- ha-values.yaml
   #- plex-values.yaml
