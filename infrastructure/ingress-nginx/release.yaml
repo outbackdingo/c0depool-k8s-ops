@@ -21,7 +21,6 @@ spec:
     controller:
       allowSnippetAnnotations: "true"
       config:
-        # allow-snippet-annotations: "true"
         use-forwarded-headers: "true"
         enable-real-ip: "true"
         proxy-real-ip-cidr: 10.0.0.0/8
