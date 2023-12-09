@@ -28,16 +28,15 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: nginx
         annotations: 
-          kubernetes.io/ingress.class: nginx
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
           nginx.ingress.kubernetes.io/proxy-body-size: 5120m
         hosts:
           - 
             host: &host "files.${PUBLIC_DOMAIN}"
             paths:
               -
-                path: /(.*)
+                path: /
                 pathType: Prefix
                 service:            
                   name: filebrowser
