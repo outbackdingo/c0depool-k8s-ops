@@ -33,9 +33,8 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: nginx
         annotations: 
-          kubernetes.io/ingress.class: nginx
-          nginx.ingress.kubernetes.io/rewrite-target: /$1
           nginx.ingress.kubernetes.io/server-snippet: |
             location ~* "^/admin" {         
                 deny all;
@@ -46,7 +45,7 @@ spec:
             host: &host "vault.${PUBLIC_DOMAIN}"
             paths:
               -
-                path: /(.*)
+                path: /
                 pathType: Prefix
                 service:            
                   name: vaultwarden
