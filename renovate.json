@@ -46,6 +46,14 @@
       "datasources": ["helm"],
       "managers": ["regex"],
       "packageNames": [
+        "ingress-nginx"
+      ],
+      "registryUrls": ["https://kubernetes.github.io/ingress-nginx/"]
+    },
+    {
+      "datasources": ["helm"],
+      "managers": ["regex"],
+      "packageNames": [
         "app-template"
       ],
       "registryUrls": ["https://bjw-s.github.io/helm-charts/"]
