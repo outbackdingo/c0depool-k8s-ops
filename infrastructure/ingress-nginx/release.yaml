@@ -19,7 +19,7 @@ spec:
       retries: 3
   values:
     controller:
-      enableSnippets: "true"
+      allowSnippetAnnotations: "true"
       config:
         # allow-snippet-annotations: "true"
         use-forwarded-headers: "true"
