@@ -32,9 +32,7 @@ spec:
         accessMode: ReadWriteOnce
       media-rd:
         enabled: true
-        type: hostPath
-        path: /mnt/media_rd
-        accessMode: ReadWriteOnce  
+        existingClaim: jellyfin-rd-pvc 
     ingress:
       main:
         enabled: true
