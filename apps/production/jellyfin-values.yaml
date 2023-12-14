@@ -30,6 +30,12 @@ spec:
         server: "${NFS_SERVER}"
         path: /mnt/ext-hdd/media/
         accessMode: ReadWriteOnce
+      media-rd:
+        enabled: true
+        type: nfs
+        server: "${NFS_SERVER}"
+        path: /data/media_rd
+        accessMode: ReadWriteOnce  
     ingress:
       main:
         enabled: true
