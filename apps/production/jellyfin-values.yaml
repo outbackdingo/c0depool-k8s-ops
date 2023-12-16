@@ -48,7 +48,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:            
-                  name: jellyfin
+                  name: main
                   port: http
         tls: 
           - secretName: "${CERT_SECRET_NAME}"
