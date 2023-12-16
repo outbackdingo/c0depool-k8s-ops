@@ -28,6 +28,7 @@ spec:
         enabled: true
         storageClass: longhorn
         size: 5Gi
+        retain: true
         accessMode: ReadWriteOnce
       media:
         enabled: true
@@ -37,7 +38,9 @@ spec:
         accessMode: ReadWriteOnce
       media-rd:
         enabled: true
-        existingClaim: jellyfin-rd-pvc
+        storageClass: local-path
+        type: hostPath
+        path: /mnt/media_rd/
     ingress:
       main:
         enabled: true
