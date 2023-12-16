@@ -7,13 +7,17 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "1.4.0"
+      version: "2.4.0"
   values:
-    image:
-      repository: jellyfin/jellyfin
-      tag: 10.8.10
-    env:
-      TZ: "${TIMEZONE}"
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: jellyfin/jellyfin
+              tag: 10.8.10
+            env:
+              TZ: "${TIMEZONE}"
     service:
       main:
         ports:
@@ -37,17 +41,15 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         hosts:
-          - 
-            host: &host "jellyfin.${PUBLIC_DOMAIN}"
+          - host: &host "jellyfin.${PUBLIC_DOMAIN}"
             paths:
-              -
-                path: /
+              - path: /
                 pathType: Prefix
                 service:            
                   name: jellyfin
-                  port: 8096
+                  port: http
         tls: 
           - secretName: "${CERT_SECRET_NAME}"
             hosts:
