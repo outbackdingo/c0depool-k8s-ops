@@ -20,8 +20,9 @@ spec:
   values:
     ingress:
       enabled: true
+      spec:
+        ingressClassName: nginx
       annotations:
-        kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/whitelist-source-range: "${INGRESS_WHITELIST_COMMON}"
       path: /
       pathType: Prefix
