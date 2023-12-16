@@ -65,7 +65,7 @@ spec:
         enabled: true
         storageClass: local-path
         type: hostPath
-        path: /mnt/media_rd/
+        hostPath: /mnt/media_rd/
     ingress:
       main:
         enabled: true
