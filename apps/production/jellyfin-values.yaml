@@ -18,6 +18,7 @@ spec:
               tag: 10.8.10
             env:
               TZ: "${TIMEZONE}"
+              JELLYFIN_CACHE_DIR: /config/cache
             resources:
               requests:
                 # Hardware acceleration using an Intel iGPU w/ QuickSync and
