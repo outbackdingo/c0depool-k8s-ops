@@ -68,8 +68,9 @@ spec:
       media-rd:
         enabled: true
         storageClass: local-path
-        type: local
-        path: /mnt/media_rd/
+        type: custom
+        local:
+          path: /mnt/media_rd/
     ingress:
       main:
         enabled: true
