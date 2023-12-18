@@ -31,6 +31,16 @@ spec:
                 # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
                 gpu.intel.com/i915: 1
                 memory: 4096Mi
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                exec:
+                  # Command to make sure media mount is good along with jellyfin
+                  command:
+                    - /bin/bash
+                    - -c
+                    - "curl http://localhost:8096/health --fail && ls -lrt /mnt/media_rd/movies/"
     service:
       main:
         ports:
