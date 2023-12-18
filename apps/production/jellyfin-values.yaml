@@ -70,6 +70,7 @@ spec:
         storageClass: local-path
         type: custom
         local:
+          name: media_rd
           path: /mnt/media_rd/
     ingress:
       main:
