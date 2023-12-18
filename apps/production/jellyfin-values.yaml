@@ -67,11 +67,8 @@ spec:
         accessMode: ReadWriteOnce
       media-rd:
         enabled: true
-        storageClass: local-path
-        type: custom
-        local:
-          name: media_rd
-          path: /mnt/media_rd/
+        type: hostPath
+        hostPath: /mnt/media_rd/
     ingress:
       main:
         enabled: true
