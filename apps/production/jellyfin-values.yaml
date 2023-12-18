@@ -37,6 +37,10 @@ spec:
                 custom: true
                 type: exec
                 spec:
+                  initialDelaySeconds: 20
+                  periodSeconds: 20
+                  timeoutSeconds: 5
+                  failureThreshold: 3
                   exec:
                     # Command to make sure media mount is good along with jellyfin
                     command:
