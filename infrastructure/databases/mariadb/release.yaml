@@ -20,7 +20,7 @@ spec:
   values:
     auth:
       rootPassword: ${MARIADB_ROOT_PASSWORD}
-    architecture: replication
+    architecture: standalone
     primary:
       persistence:
         enabled: true
