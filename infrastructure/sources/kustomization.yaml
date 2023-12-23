@@ -9,3 +9,4 @@ resources:
   - wg-easy.yaml
   - bjw-s.yaml
   - intel.yaml
+  - bitnami.yaml
