@@ -76,6 +76,15 @@
         "intel-device-plugins-gpu"
       ],
       "registryUrls": ["https://intel.github.io/helm-charts/"]
+    },
+    {
+      "datasources": ["helm"],
+      "managers": ["regex"],
+      "packageNames": [
+        "mariadb",
+        "redis"
+      ],
+      "registryUrls": ["https://charts.bitnami.com/bitnami/"]
     }
   ]
 }
