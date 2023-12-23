@@ -5,6 +5,7 @@ resources:
   - wireguard
   #- wg-easy
   - databases
+  - redis
   - ingress-nginx
   # - netdata
   - intel-device-plugins
