@@ -22,7 +22,13 @@ spec:
       storageClass: "longhorn"
       redis:
         password: "${REDIS_AUTH}"
-    initContainers:
-      - name: repair-redis
-        image: docker.io/bitnami/redis:7.2.3-debian-11-r2
-        command: ['sh', '-c', 'redis-check-aof --fix  /data/appendonly.aof']
+    master:
+      initContainers:
+        - name: repair-redis
+          image: docker.io/bitnami/redis:7.2.3-debian-11-r2
+          command: ['sh', '-c', 'redis-check-aof --fix  /data/appendonly.aof']
+    replica:
+      initContainers:
+        - name: repair-redis
+          image: docker.io/bitnami/redis:7.2.3-debian-11-r2
+          command: ['sh', '-c', 'redis-check-aof --fix  /data/appendonly.aof']
