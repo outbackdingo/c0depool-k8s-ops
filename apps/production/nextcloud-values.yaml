@@ -75,9 +75,12 @@ spec:
             'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
           );
         logging.config.php: |-
-          'log_type' => 'file',
-          'logfile' => '/dev/stdout',
-          'loglevel' => 1,
+          <?php
+          $CONFIG = array (
+            'log_type' => 'file',
+            'logfile' => '/dev/stdout',
+            'loglevel' => 1,
+          );
         misc.config.php: |-
           <?php
           $CONFIG = array (
