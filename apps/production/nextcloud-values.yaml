@@ -45,11 +45,11 @@ spec:
       tls:
         - secretName: "${CERT_SECRET_NAME}"
           hosts:
-            - *host
+            - &host "nextcloud.${PUBLIC_DOMAIN}"
     phpClientHttpsFix:
       enabled: true
     nextcloud:
-      host: &host "nextcloud.${PUBLIC_DOMAIN}"
+      host: *host
       password: "${NEXTCLOUD_ADMIN_PASSWORD}"
       phpConfigs:
           www.conf: |-
