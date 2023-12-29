@@ -9,7 +9,8 @@ spec:
       chart: nextcloud
       version: "4.5.10"
   values:
-    image: 
+    image:
+      repository: nextcloud
       tag: 28.0.1-fpm-alpine
     ingress:
       enabled: true
