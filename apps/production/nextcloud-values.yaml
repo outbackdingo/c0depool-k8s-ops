@@ -78,6 +78,7 @@ spec:
           <?php
           $CONFIG = array (
             'skeletondirectory' => '',
+            'logfile' => '/dev/stdout',
             'maintenance' => false,
           );
       extraEnv:
