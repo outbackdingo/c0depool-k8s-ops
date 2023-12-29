@@ -85,6 +85,14 @@
         "redis"
       ],
       "registryUrls": ["https://charts.bitnami.com/bitnami/"]
+    },
+    {
+      "datasources": ["helm"],
+      "managers": ["regex"],
+      "packageNames": [
+        "nextcloud"
+      ],
+      "registryUrls": ["https://nextcloud.github.io/helm/"]
     }
   ]
 }
