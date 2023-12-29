@@ -6,6 +6,7 @@ metadata:
 spec:
   chart:
     spec:
+      chart: nextcloud
       version: "4.5.10"
   values:
     image: 
