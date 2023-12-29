@@ -78,7 +78,7 @@ spec:
           <?php
           $CONFIG = array (
             'log_type' => 'file',
-            'logfile' => '/dev/stdout',
+            'logfile' => '/proc/self/fd/2',
             'loglevel' => 1,
           );
         misc.config.php: |-
