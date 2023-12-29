@@ -1,16 +1,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: photoprism
-  namespace: photoprism
+  name: nextcloud
+  namespace: nextcloud
 spec:
-  releaseName: photoprism
+  releaseName: nextcloud
   chart:
     spec:
-      chart: photoprism
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: nextcloud
         namespace: flux-system
   interval: 5m
   install:

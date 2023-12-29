@@ -7,4 +7,5 @@ metadata:
 data:
   TIMEZONE: Asia/Kolkata
   NFS_SERVER: 192.168.0.225
-  PHOTOPRISM_DATABASE_SERVER: mariadb.databases.svc.cluster.local:3306
+  MARIADB_SERVICE: mariadb.databases.svc.cluster.local:3306
+  REDIS_SERVICE: redis-master.redis.svc.cluster.local

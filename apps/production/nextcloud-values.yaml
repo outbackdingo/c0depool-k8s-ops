@@ -1,0 +1,108 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nextcloud
+  namespace: nextcloud
+spec:
+  chart:
+    spec:
+      version: "4.5.10"
+  values:
+    image: 
+      tag: 28.0.1-fpm-alpine
+    ingress:
+      enabled: true
+      className: nginx
+      annotations: 
+        nginx.ingress.kubernetes.io/proxy-body-size: 4G
+        nginx.ingress.kubernetes.io/disable-proxy-intercept-errors: "true"
+        nginx.ingress.kubernetes.io/custom-http-errors: "404,415"
+        nginx.ingress.kubernetes.io/default-backend: "nextcloud"
+        nginx.ingress.kubernetes.io/server-snippet: |-
+          server_tokens off;
+          proxy_hide_header X-Powered-By;
+          rewrite ^/.well-known/webfinger /index.php/.well-known/webfinger last;
+          rewrite ^/.well-known/nodeinfo /index.php/.well-known/nodeinfo last;
+          rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+          rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
+          location = /.well-known/carddav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /.well-known/caldav {
+            return 301 $scheme://$host/remote.php/dav;
+          }
+          location = /robots.txt {
+            allow all;
+            log_not_found off;
+            access_log off;
+          }
+          location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+            deny all;
+          }
+          location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
+            deny all;
+          }
+      tls:
+        - secretName: "${CERT_SECRET_NAME}"
+          hosts:
+            - *host
+    phpClientHttpsFix:
+      enabled: true
+    nextcloud:
+      host: &host "nextcloud.${PUBLIC_DOMAIN}"
+      password: "${NEXTCLOUD_ADMIN_PASSWORD}"
+      phpConfigs:
+          www.conf: |-
+            [www]
+            user = www-data
+            group = www-data
+            listen = 127.0.0.1:9000
+
+            pm = dynamic
+            pm.max_children = 20
+            pm.start_servers = 5
+            pm.min_spare_servers = 5
+            pm.max_spare_servers = 15
+      configs:
+        proxy.config.php: |-
+          <?php
+          $CONFIG = array (
+            'trusted_proxies' => array(
+              0 => '127.0.0.1',
+              1 => '10.0.0.0/8',
+            ),
+            'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+          );
+        misc.config.php: |-
+          <?php
+          $CONFIG = array (
+            'skeletondirectory' => '',
+            'maintenance' => false,
+          );
+      extraEnv:
+        - name: REDIS_HOST
+          value: "${REDIS_SERVICE}"
+        - name: REDIS_HOST_PASSWORD
+          value: "${REDIS_AUTH}"
+      extraVolumes:
+        - name: nfs
+          nfs:
+            server: "${NFS_SERVER}"
+            path: "/mnt/ext-hdd/media/"
+            readOnly: false
+      extraVolumeMounts:
+        - name: nfs
+          mountPath: "/nextcloud-nfs"
+    nginx:
+      enabled: true
+    internalDatabase:
+      enabled: false
+    externalDatabase:
+      enabled: true
+      type: mysql
+      host: "${MARIADB_SERVICE}"
+      user: nextcloud
+      password: "${NEXTCLOUD_DATABASE_PASSWORD}"
+    persistence:
+      enabled: true
+      storageClass: "longhorn"
