@@ -5,7 +5,7 @@ resources:
   - ../base/jellyseerr
   # - ../base/filebrowser
   - ../base/vaultwarden
-  # - ../base/nextcloud
+  - ../base/nextcloud
   #- ../base/babybuddy
   # - ../base/photoprism
   #- ../base/home-assistant
@@ -15,7 +15,7 @@ patchesStrategicMerge:
   - jellyseerr-values.yaml
   # - filebrowser-values.yaml
   - vaultwarden-values.yaml
-  # - nextcloud-values.yaml
+  - nextcloud-values.yaml
   #- babybuddy-values.yaml
   # - photoprism-values.yaml
   #- ha-values.yaml
