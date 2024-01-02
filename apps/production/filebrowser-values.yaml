@@ -32,11 +32,13 @@ spec:
         accessMode: ReadWriteOnce
       data:
         enabled: true
-        mountPath: /srv
         type: nfs
         server: "${NFS_SERVER}"
         path: /mnt/ext-hdd/media/
         accessMode: ReadWriteOnce
+        globalMounts:
+          - path: /srv
+            readOnly: false
     ingress:
       main:
         enabled: true
