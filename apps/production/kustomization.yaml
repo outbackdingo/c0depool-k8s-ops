@@ -3,7 +3,7 @@ kind: Kustomization
 resources: 
   - ../base/jellyfin
   - ../base/jellyseerr
-  # - ../base/filebrowser
+  - ../base/filebrowser
   - ../base/vaultwarden
   - ../base/nextcloud
   #- ../base/babybuddy
@@ -13,7 +13,7 @@ resources:
 patchesStrategicMerge: 
   - jellyfin-values.yaml
   - jellyseerr-values.yaml
-  # - filebrowser-values.yaml
+  - filebrowser-values.yaml
   - vaultwarden-values.yaml
   - nextcloud-values.yaml
   #- babybuddy-values.yaml
