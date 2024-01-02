@@ -7,10 +7,9 @@ spec:
   releaseName: filebrowser
   chart:
     spec:
-      chart: filebrowser
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home
+        name: bjw-s
         namespace: flux-system
   interval: 5m
   install:

@@ -6,21 +6,32 @@ metadata:
 spec:
   chart:
     spec:
-      version: "1.4.2"
+      chart: app-template
+      version: "2.4.0"
   values:
-    image:
-      repository: filebrowser/filebrowser   
-      tag: v2.26.0
-    env:
-      TZ: "${TIMEZONE}" 
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: filebrowser/filebrowser
+              tag: v2.26.0
+            env:
+              TZ: "${TIMEZONE}"
+    service:
+      main:
+        ports:
+          http:
+            port: 80      
     persistence:
       config:
         enabled: true
-        mountpath: /config
         storageClass: longhorn
+        size: 1Gi
+        retain: true
+        accessMode: ReadWriteOnce
       data:
         enabled: true
-        mountPath: /srv
         type: nfs
         server: "${NFS_SERVER}"
         path: /mnt/ext-hdd/media/
@@ -28,20 +39,18 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations: 
           nginx.ingress.kubernetes.io/proxy-body-size: 5120m
         hosts:
-          - 
-            host: &host "files.${PUBLIC_DOMAIN}"
+          - host: &host "files.${PUBLIC_DOMAIN}"
             paths:
-              -
-                path: /
+              - path: /
                 pathType: Prefix
                 service:            
-                  name: filebrowser
-                  port: 80
+                  name: main
+                  port: http
         tls: 
           - secretName: "${CERT_SECRET_NAME}"
             hosts:
-            - *host          
+            - *host
