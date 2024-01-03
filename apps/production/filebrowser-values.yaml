@@ -22,7 +22,19 @@ spec:
       main:
         ports:
           http:
-            port: 80      
+            port: 80
+    configMaps:
+      settings:
+        enabled: true
+        data: |
+          {
+            "port": 80,
+            "baseURL": "",
+            "address": "",
+            "log": "stdout",
+            "database": "/config/filebrowser.db",
+            "root": "/srv"
+          }
     persistence:
       config:
         enabled: true
@@ -30,6 +42,14 @@ spec:
         size: 1Gi
         retain: true
         accessMode: ReadWriteOnce
+      settings:
+        enabled: true
+        type: configMap
+        name: settings
+        advancedMounts:
+          main:
+            main:
+              - path: /.filebrowser.json
       data:
         enabled: true
         type: nfs
