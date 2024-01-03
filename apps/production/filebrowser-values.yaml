@@ -26,15 +26,16 @@ spec:
     configMaps:
       settings:
         enabled: true
-        data: |
-          {
-            "port": 80,
-            "baseURL": "",
-            "address": "",
-            "log": "stdout",
-            "database": "/config/filebrowser.db",
-            "root": "/srv"
-          }
+        data: 
+          .filebrowser.json: |
+            {
+              "port": 80,
+              "baseURL": "",
+              "address": "",
+              "log": "stdout",
+              "database": "/config/filebrowser.db",
+              "root": "/srv"
+            }
     persistence:
       config:
         enabled: true
