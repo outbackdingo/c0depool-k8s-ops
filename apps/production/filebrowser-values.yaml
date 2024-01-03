@@ -51,6 +51,7 @@ spec:
           main:
             main:
               - path: /.filebrowser.json
+                subPath: .filebrowser.json
       data:
         enabled: true
         type: nfs
