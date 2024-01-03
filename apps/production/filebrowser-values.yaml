@@ -43,7 +43,7 @@ spec:
         size: 1Gi
         retain: true
         accessMode: ReadWriteOnce
-      settings:
+      filebrowser-settings:
         enabled: true
         type: configMap
         name: filebrowser-settings
