@@ -46,7 +46,7 @@ spec:
       settings:
         enabled: true
         type: configMap
-        name: settings
+        name: filebrowser-settings
         advancedMounts:
           main:
             main:
