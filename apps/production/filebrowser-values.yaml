@@ -33,7 +33,7 @@ spec:
               "baseURL": "",
               "address": "",
               "log": "stdout",
-              "database": "/config/filebrowser.db",
+              "database": "/config/database.db",
               "root": "/srv"
             }
     persistence:
