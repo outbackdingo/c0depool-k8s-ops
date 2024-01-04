@@ -69,6 +69,7 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /mnt/media_rd/
+        readOnly: true
     ingress:
       main:
         enabled: true
