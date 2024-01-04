@@ -67,8 +67,8 @@ spec:
         accessMode: ReadWriteOnce
       media-rd:
         enabled: true
-        type: hostPath
-        hostPath: /mnt/media_rd/
+        type: persistentVolumeClaim
+        existingClaim: data-rclone-example-pvc
     ingress:
       main:
         enabled: true
