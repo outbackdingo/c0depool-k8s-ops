@@ -24,13 +24,13 @@ spec:
                 # Hardware acceleration using an Intel iGPU w/ QuickSync and
                 # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
                 gpu.intel.com/i915: 1
-                cpu: 200m
-                memory: 256Mi
+                cpu: 400m
+                memory: 1Gi
               limits:
                 # Hardware acceleration using an Intel iGPU w/ QuickSync and
                 # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
                 gpu.intel.com/i915: 1
-                memory: 4096Mi
+                memory: 4Gi
             probes:
               liveness:
                 enabled: true
