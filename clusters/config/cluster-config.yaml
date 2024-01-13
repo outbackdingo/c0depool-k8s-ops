@@ -7,5 +7,5 @@ metadata:
 data:
   TIMEZONE: Asia/Kolkata
   NFS_SERVER: 192.168.0.225
-  MARIADB_SERVICE: mariadb.databases.svc.cluster.local:3306
+  MARIADB_SERVICE: mariadb.databases.svc.cluster.local
   REDIS_SERVICE: redis-master.redis.svc.cluster.local
