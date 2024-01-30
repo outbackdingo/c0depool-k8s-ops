@@ -22,3 +22,5 @@ spec:
       storageClass: "longhorn"
       redis:
         password: "${REDIS_AUTH}"
+    volumePermissions:
+      enabled: true
