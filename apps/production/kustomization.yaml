@@ -6,6 +6,7 @@ resources:
   - ../base/filebrowser
   - ../base/vaultwarden
   - ../base/nextcloud
+  - ../base/c0depool-blog
   #- ../base/babybuddy
   # - ../base/photoprism
   #- ../base/home-assistant
@@ -16,6 +17,7 @@ patchesStrategicMerge:
   - filebrowser-values.yaml
   - vaultwarden-values.yaml
   - nextcloud-values.yaml
+  - c0depool-blog-values.yaml
   #- babybuddy-values.yaml
   # - photoprism-values.yaml
   #- ha-values.yaml

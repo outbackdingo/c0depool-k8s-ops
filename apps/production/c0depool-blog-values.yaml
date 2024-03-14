@@ -1,0 +1,42 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: c0depool-blog
+  namespace: c0depool-blog
+spec:
+  chart:
+    spec:
+      chart: app-template
+      version: "2.4.0"
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/c0depool/c0depool-blog
+              tag: v0.3.1
+    service:
+      main:
+        type: ClusterIP
+        ports:
+          http:
+            port: 9000
+    ingress:
+      main:
+        enabled: true
+        className: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: "${CERT_ISSUER}"
+        hosts:
+          - host: &host "${PUBLIC_BLOG_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+                service:            
+                  name: main
+                  port: http
+        tls: 
+          - secretName: *host
+            hosts:
+            - *host

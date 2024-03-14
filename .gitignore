@@ -24,6 +24,8 @@ kubeconfig*
 talosconfig*
 *.pub
 *.key
+# VSCode
+.vscode
 # Extras
 config.xml
 *.pid
