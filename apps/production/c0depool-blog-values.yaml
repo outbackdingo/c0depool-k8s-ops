@@ -15,7 +15,7 @@ spec:
           main:
             image:
               repository: ghcr.io/c0depool/c0depool-blog
-              tag: v0.3.3
+              tag: v0.3.4
     service:
       main:
         type: ClusterIP
