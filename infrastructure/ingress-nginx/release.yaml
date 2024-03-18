@@ -41,4 +41,4 @@ spec:
       - name: SHOW_DETAILS
         value: "false"
     tcp: 
-      9999: "zurg/zurg:9999"
+      "9999": "zurg/zurg:9999"
