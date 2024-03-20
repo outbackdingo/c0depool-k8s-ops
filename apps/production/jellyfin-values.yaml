@@ -65,13 +65,6 @@ spec:
         server: "${NFS_SERVER}"
         path: /mnt/ext-hdd/media/
         accessMode: ReadWriteOnce
-      media-rd:
-        enabled: true
-        type: hostPath
-        hostPath: /mnt/media_rd/
-        globalMounts:
-          - path: /media-rd
-            readOnly: true
       media-zurg:
         enabled: true
         type: hostPath
