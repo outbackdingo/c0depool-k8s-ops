@@ -11,7 +11,7 @@ spec:
   values:
     image:
       repository: vaultwarden/server
-      tag: 1.30.3
+      tag: 1.30.5
     strategy:
       type: Recreate
     env:
