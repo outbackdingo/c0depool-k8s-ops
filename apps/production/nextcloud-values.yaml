@@ -115,3 +115,14 @@ spec:
     persistence:
       enabled: true
       storageClass: "longhorn"
+    redis:
+      enabled: true
+      auth:
+        enabled: true
+        password: "${REDIS_AUTH}"
+      master:
+        persistence:
+          storageClass: "longhorn"
+      replica:
+        persistence:
+          storageClass: "longhorn"
