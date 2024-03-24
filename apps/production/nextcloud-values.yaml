@@ -121,3 +121,5 @@ spec:
       replica:
         persistence:
           storageClass: "longhorn"
+      volumePermissions:
+        enabled: true
