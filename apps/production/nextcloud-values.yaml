@@ -88,11 +88,11 @@ spec:
             'skeletondirectory' => '',
             'maintenance' => false,
           );
-      extraEnv:
-        - name: REDIS_HOST
-          value: "${REDIS_SERVICE}"
-        - name: REDIS_HOST_PASSWORD
-          value: "${REDIS_AUTH}"
+      # extraEnv:
+      #   - name: REDIS_HOST
+      #     value: "${REDIS_SERVICE}"
+      #   - name: REDIS_HOST_PASSWORD
+      #     value: "${REDIS_AUTH}"
       extraVolumes:
         - name: nfs
           nfs:
