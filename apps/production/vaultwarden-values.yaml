@@ -7,24 +7,25 @@ spec:
   chart:
     spec:
       chart: app-template    
-      version: "1.4.0"
+      version: "3.0.4"
   values:
-    image:
-      repository: vaultwarden/server
-      tag: 1.30.5
-    strategy:
-      type: Recreate
-    env:
-      DATA_FOLDER: "config"
-      ADMIN_TOKEN: "${VAULTWARDEN_ADMIN_TOKEN}"        
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: vaultwarden/server
+              tag: 1.30.5
+            env:
+              DATA_FOLDER: "config"
+              ADMIN_TOKEN: "${VAULTWARDEN_ADMIN_TOKEN}"  
     service:
       main:
+        controller: main
+        type: ClusterIP
         ports:
           http:
-            port: 80
-          websocket:
-            enabled: false
-            port: 3012    
+            port: 80   
     persistence:
       config:
         enabled: true
@@ -32,8 +33,7 @@ spec:
         accessMode: ReadWriteOnce           
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        className: nginx
         annotations: 
           nginx.ingress.kubernetes.io/server-snippet: |
             location ~* "^/admin" {         
@@ -41,15 +41,13 @@ spec:
                 return 403;
               }
         hosts:
-          - 
-            host: &host "vault.${PUBLIC_DOMAIN}"
+          - host: &host "vault.${PUBLIC_DOMAIN}"
             paths:
-              -
-                path: /
+              - path: /
                 pathType: Prefix
                 service:            
-                  name: vaultwarden
-                  port: 80
+                  identifier: main
+                  port: http
         tls: 
           - secretName: "${CERT_SECRET_NAME}"
             hosts:
