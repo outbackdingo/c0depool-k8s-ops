@@ -30,7 +30,8 @@ spec:
       config:
         enabled: true
         storageClass: longhorn
-        accessMode: ReadWriteOnce           
+        accessMode: ReadWriteOnce
+        size: 1Gi         
     ingress:
       main:
         className: nginx
