@@ -117,9 +117,11 @@ spec:
         password: "${REDIS_AUTH}"
       master:
         persistence:
+          enabled: false
           storageClass: "longhorn"
       replica:
         persistence:
+          enabled: false
           storageClass: "longhorn"
       volumePermissions:
         enabled: true
