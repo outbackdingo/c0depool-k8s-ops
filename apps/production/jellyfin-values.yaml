@@ -72,14 +72,6 @@ spec:
         globalMounts:
           - path: /media-zurg
             readOnly: true
-      media-zurg-test:
-        enabled: true
-        type: nfs
-        server: "192.168.0.230"
-        path: /zurg_media
-        globalMounts:
-          - path: /media-zurg-test
-            readOnly: true
     ingress:
       main:
         enabled: true
