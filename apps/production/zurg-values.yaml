@@ -31,7 +31,7 @@ spec:
         data: 
           config.yaml: |
             zurg: v1
-            token: "${ZURG_TOKEN}"
+            token: ${ZURG_TOKEN}
             check_for_changes_every_secs: 10
             enable_repair: true
             auto_delete_rar_torrents: false
