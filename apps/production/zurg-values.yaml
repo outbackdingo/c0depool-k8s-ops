@@ -37,7 +37,6 @@ spec:
             auto_delete_rar_torrents: false
             on_library_update: |
               curl -X POST -H "X-MediaBrowser-Token: ${JELLYFIN_API_TOKEN}" https://jellyfin.${PUBLIC_DOMAIN}/library/refresh -v
-
             directories:
               anime:
                 group_order: 10
@@ -45,20 +44,17 @@ spec:
                 filters:
                   - regex: /\b[a-fA-F0-9]{8}\b/
                   - any_file_inside_regex: /\b[a-fA-F0-9]{8}\b/
-
               shows:
                 group_order: 20
                 group: media
                 filters:
                   - has_episodes: true
-
               movies:
                 group_order: 30
                 group: media
                 only_show_the_biggest_file: true
                 filters:
                   - regex: /.*/
-
     persistence:
       config:
         enabled: true
