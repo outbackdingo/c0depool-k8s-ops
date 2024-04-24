@@ -31,21 +31,6 @@ spec:
                 # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
                 gpu.intel.com/i915: 1
                 memory: 4Gi
-            probes:
-              liveness:
-                enabled: true
-                custom: true
-                type: exec
-                spec:
-                  initialDelaySeconds: 20
-                  periodSeconds: 20
-                  timeoutSeconds: 5
-                  failureThreshold: 3
-                  exec:
-                    command:
-                      - /bin/bash
-                      - -c
-                      - "curl http://localhost:8096/health --fail"
     service:
       main:
         controller: main
