@@ -17,3 +17,6 @@ spec:
   install:
     remediation:
       retries: 3
+  values:
+    nodeSelector:
+            intel.feature.node.kubernetes.io/gpu: "true"
