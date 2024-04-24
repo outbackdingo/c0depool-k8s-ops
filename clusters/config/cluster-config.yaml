@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 data:
   TIMEZONE: Europe/London
-  NFS_SERVER: 192.168.0.225
+  NFS_SERVER: 192.168.0.230
   INGRESS_LB_IP: 192.168.0.193
   MARIADB_SERVICE: mariadb.databases.svc.cluster.local
   REDIS_SERVICE: redis-master.redis.svc.cluster.local
