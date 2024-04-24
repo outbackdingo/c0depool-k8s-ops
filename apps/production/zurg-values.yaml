@@ -1,0 +1,72 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: zurg
+  namespace: zurg
+spec:
+  chart:
+    spec:
+      chart: app-template    
+      version: "3.0.4"
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/debridmediamanager/zurg-testing
+              tag: v0.9.3-hotfix.11
+              pullPolicy: IfNotPresent
+    service:
+      main:
+        controller: main
+        type: ClusterIP
+        ports:
+          http:
+            port: 9999
+
+    configMaps:
+      config:
+        enabled: true
+        data: 
+          config.yaml: |
+            zurg: v1
+            token: "${ZURG_TOKEN}""
+            check_for_changes_every_secs: 10
+            enable_repair: true
+            auto_delete_rar_torrents: false
+            # on_library_update: |
+            #   curl -X POST -H "X-MediaBrowser-Token: $JELLYFIN_API_TOKEN" https://jellyfin.${PUBLIC_DOMAIN}/library/refresh -v
+
+            directories:
+              anime:
+                group_order: 10
+                group: media
+                filters:
+                  - regex: /\b[a-fA-F0-9]{8}\b/
+                  - any_file_inside_regex: /\b[a-fA-F0-9]{8}\b/
+
+              shows:
+                group_order: 20
+                group: media
+                filters:
+                  - has_episodes: true
+
+              movies:
+                group_order: 30
+                group: media
+                only_show_the_biggest_file: true
+                filters:
+                  - regex: /.*/
+
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: zurg-config
+        advancedMounts:
+          main:
+            main:
+              - path: /app/config.yml
+                readOnly: true
+                subPath: config.yaml
