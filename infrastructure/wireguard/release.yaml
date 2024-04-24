@@ -33,18 +33,20 @@ spec:
             probes:
               liveness:
                 enabled: false
-    defaultPodOptions:
-      securityContext:
-        fsGroup: 1000
-        capabilities:
-          add:
-          - NET_ADMIN
-          - SYS_MODULE
+            securityContext:
+              fsGroup: 1000
+              capabilities:
+                add:
+                  - NET_ADMIN
+                  - SYS_MODULE
+
     persistence:
       config:
         enabled: true
-        mountPath: "/etc/wireguard/wg0.conf"
-        subPath: "wg0.conf"
+        globalMounts:
+          - path: "/etc/wireguard/wg0.conf"
+            subPath: "wg0.conf"
+            readOnly: true
         type: "custom"
         volumeSpec:
           secret:
