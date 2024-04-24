@@ -5,8 +5,9 @@ metadata:
   name: cluster-config
   namespace: flux-system
 data:
-  TIMEZONE: Asia/Kolkata
+  TIMEZONE: Europe/London
   NFS_SERVER: 192.168.0.225
+  INGRESS_LB_IP: 192.168.0.193
   MARIADB_SERVICE: mariadb.databases.svc.cluster.local
   REDIS_SERVICE: redis-master.redis.svc.cluster.local
   PUBLIC_BLOG_DOMAIN: surajremanan.com
