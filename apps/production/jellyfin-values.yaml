@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "2.4.0"
+      version: "3.0.4"
   values:
     controllers:
       main:
@@ -42,13 +42,13 @@ spec:
                   timeoutSeconds: 5
                   failureThreshold: 3
                   exec:
-                    # Command to make sure media mount is good along with jellyfin
                     command:
                       - /bin/bash
                       - -c
-                      - "curl http://localhost:8096/health --fail" # && ls -lrt /mnt/media_rd/movies/"
+                      - "curl http://localhost:8096/health --fail"
     service:
       main:
+        controller: main
         ports:
           http:
             port: 8096      
@@ -63,8 +63,7 @@ spec:
         enabled: true
         type: nfs
         server: "${NFS_SERVER}"
-        path: /mnt/ext-hdd/media/
-        accessMode: ReadWriteOnce
+        path: /media/
       media-zurg:
         enabled: true
         type: hostPath
@@ -82,7 +81,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:            
-                  name: main
+                  identifier: main
                   port: http
         tls: 
           - secretName: "${CERT_SECRET_NAME}"
