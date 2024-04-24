@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: "1.4.0"
+      version: "3.0.4"
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -18,30 +18,31 @@ spec:
     remediation:
       retries: 3
   values:
-    image:
-      repository: ghcr.io/c0depool/wireguard
-      tag: v1.0.20210914
-      pullPolicy: Always
-    env:
-      TZ: "${TIMEZONE}"
-      IPTABLES_BACKEND: nft
-      KILLSWITCH: false
-    service:
+    controllers:
       main:
-        enabled: false
-    probes:
-      liveness:
-        enabled: false
-    securityContext:
-      fsGroup: 1000
-      capabilities:
-        add:
-        - NET_ADMIN
-        - SYS_MODULE
+        containers:
+          main:
+            image:
+              repository: ghcr.io/c0depool/wireguard
+              tag: v1.0.20210914
+              pullPolicy: Always
+            env:
+              TZ: "${TIMEZONE}"
+              IPTABLES_BACKEND: nft
+              KILLSWITCH: false
+            probes:
+              liveness:
+                enabled: false
+    defaultPodOptions:
+      securityContext:
+        fsGroup: 1000
+        capabilities:
+          add:
+          - NET_ADMIN
+          - SYS_MODULE
     persistence:
       config:
         enabled: true
-        storageClass: longhorn
         mountPath: "/etc/wireguard/wg0.conf"
         subPath: "wg0.conf"
         type: "custom"
