@@ -35,6 +35,8 @@ spec:
             check_for_changes_every_secs: 10
             enable_repair: true
             auto_delete_rar_torrents: false
+            on_library_update: |
+              curl -X POST -H "X-MediaBrowser-Token: ${JELLYFIN_API_TOKEN}" "https://jellyfin.${PUBLIC_DOMAIN}/library/refresh" -v
             directories:
               anime:
                 group_order: 10
