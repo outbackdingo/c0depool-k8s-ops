@@ -92,7 +92,7 @@ spec:
         - name: nfs
           nfs:
             server: "${NFS_SERVER}"
-            path: "/mnt/ext-hdd/media/"
+            path: "/media/"
             readOnly: false
       extraVolumeMounts:
         - name: nfs
