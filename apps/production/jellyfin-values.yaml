@@ -49,13 +49,13 @@ spec:
         type: nfs
         server: "${NFS_SERVER}"
         path: /media/
-      # media-zurg:
-      #   enabled: true
-      #   type: hostPath
-      #   hostPath: /mnt/media_zurg/
-      #   globalMounts:
-      #     - path: /media-zurg
-      #       readOnly: true
+      media-zurg:
+        enabled: true
+        type: persistentVolumeClaim
+        existingClaim: rclone-zurg
+        globalMounts:
+          - path: /media-zurg
+            readOnly: true
     ingress:
       main:
         enabled: true
