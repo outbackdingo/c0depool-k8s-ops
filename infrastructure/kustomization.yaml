@@ -7,4 +7,4 @@ resources:
   - databases
   - ingress-nginx
   # - netdata
-  # - intel-device-plugins
+  - intel-device-plugins
