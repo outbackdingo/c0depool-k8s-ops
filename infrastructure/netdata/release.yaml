@@ -27,7 +27,7 @@ spec:
       path: /
       pathType: Prefix
       hosts:
-        - &host "netdata.${PUBLIC_DOMAIN}"
+        - &host "netdata.internal.${PUBLIC_DOMAIN}"
       tls: 
         - secretName: "${CERT_SECRET_NAME}"
           hosts:
@@ -36,7 +36,7 @@ spec:
       database:
         persistence: true
         storageclass: "longhorn"
-        volumesize: 2Gi
+        volumesize: 10Gi
       alarms:
         persistence: true  
         storageclass: "longhorn"
