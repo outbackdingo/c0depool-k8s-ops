@@ -33,7 +33,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 10Gi
+      storage: 10Ti
   storageClassName: rclone
   selector:
     matchLabels:
