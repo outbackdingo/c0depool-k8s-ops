@@ -52,7 +52,7 @@ spec:
       media-zurg:
         enabled: true
         type: hostPath
-        path: /var/mnt/zurg
+        hostPath: /var/mnt/zurg
         globalMounts:
           - path: /media-zurg
             readOnly: true
