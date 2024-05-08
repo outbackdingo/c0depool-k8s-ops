@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteMany
   capacity:
-    storage: 10Gi
+    storage: 10Ti
   storageClassName: rclone
   csi:
     driver: csi-rclone
