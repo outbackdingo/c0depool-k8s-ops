@@ -51,8 +51,9 @@ spec:
         path: /media/
       media-zurg:
         enabled: true
-        type: hostPath
-        hostPath: /var/mnt/zurg
+        type: nfs
+        server: "${NFS_SERVER}"
+        path: /zurg/
         globalMounts:
           - path: /media-zurg
             readOnly: true
