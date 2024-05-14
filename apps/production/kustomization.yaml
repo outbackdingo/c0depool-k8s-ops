@@ -8,8 +8,8 @@ resources:
   - ../base/c0depool-blog
   - ../base/zurg
   - ../base/immich
+  - misc-manifests
 patchesStrategicMerge:
-  - misc-manifests/kustomization.yaml
   - jellyfin-values.yaml
   - filebrowser-values.yaml
   - vaultwarden-values.yaml
