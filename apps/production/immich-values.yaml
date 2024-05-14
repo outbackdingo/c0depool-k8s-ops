@@ -9,6 +9,8 @@ spec:
       chart: immich
       version: "0.6.0"
   values:
+    env:
+      REDIS_PASSWORD: '{{ .Values.redis.auth.password }}'
     image:
       tag: v1.100.0
     immich:
