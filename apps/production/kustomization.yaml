@@ -9,7 +9,7 @@ resources:
   - ../base/zurg
   - ../base/immich
 patchesStrategicMerge:
-  - misc-manifests
+  - misc-manifests/kustomization.yaml
   - jellyfin-values.yaml
   - filebrowser-values.yaml
   - vaultwarden-values.yaml
