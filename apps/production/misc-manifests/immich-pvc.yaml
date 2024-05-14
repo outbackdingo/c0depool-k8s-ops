@@ -20,6 +20,8 @@ metadata:
   name: nfs-immich-pvc
   namespace: immich
 spec:
+  resources:
+    storage: 400Gi
   accessModes:
     - ReadWriteMany
   volumeName: nfs-immich-pv
