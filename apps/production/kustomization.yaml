@@ -1,17 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources: 
-  # - misc-manifests
+resources:
   - ../base/jellyfin
   - ../base/filebrowser
   - ../base/vaultwarden
   - ../base/nextcloud
   - ../base/c0depool-blog
   - ../base/zurg
-patchesStrategicMerge: 
+  - ../base/immich
+patchesStrategicMerge:
+  - misc-manifests
   - jellyfin-values.yaml
   - filebrowser-values.yaml
   - vaultwarden-values.yaml
   - nextcloud-values.yaml
   - c0depool-blog-values.yaml
   - zurg-values.yaml
+  - immich-values.yaml

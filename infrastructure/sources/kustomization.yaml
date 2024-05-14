@@ -11,3 +11,4 @@ resources:
   - intel.yaml
   - bitnami.yaml
   - nextcloud.yaml
+  - immich.yaml
