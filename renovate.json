@@ -93,6 +93,14 @@
         "nextcloud"
       ],
       "registryUrls": ["https://nextcloud.github.io/helm/"]
+    },
+    {
+      "datasources": ["helm"],
+      "managers": ["regex"],
+      "packageNames": [
+        "immich"
+      ],
+      "registryUrls": ["https://immich-app.github.io/immich-charts"]
     }
   ]
 }
