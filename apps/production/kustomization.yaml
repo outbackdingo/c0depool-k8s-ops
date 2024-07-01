@@ -5,7 +5,7 @@ resources:
   - ../base/filebrowser
   - ../base/vaultwarden
   - ../base/nextcloud
-  # - ../base/c0depool-blog
+  - ../base/c0depool-blog
   - ../base/zurg
   - ../base/immich
   - misc-manifests
@@ -14,6 +14,6 @@ patchesStrategicMerge:
   - filebrowser-values.yaml
   - vaultwarden-values.yaml
   - nextcloud-values.yaml
-  # - c0depool-blog-values.yaml
+  - c0depool-blog-values.yaml
   - zurg-values.yaml
   - immich-values.yaml
