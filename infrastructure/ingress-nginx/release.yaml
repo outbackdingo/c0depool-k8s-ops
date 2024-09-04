@@ -36,7 +36,7 @@ spec:
         annotations: 
           io.cilium/lb-ipam-ips: ${INGRESS_LB_IP}
     defaultBackend:
-      enabled: true
+      enabled: false
       image:
         repository: ghcr.io/tarampampam/error-pages
         tag: 3.3.0
