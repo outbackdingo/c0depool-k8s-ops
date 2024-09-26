@@ -12,3 +12,4 @@ resources:
   - bitnami.yaml
   - nextcloud.yaml
   - immich.yaml
+  - goauthentik.yaml
