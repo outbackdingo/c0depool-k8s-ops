@@ -113,9 +113,13 @@
       "datasources": ["helm"],
       "managers": ["regex"],
       "packageNames": [
-        "immich"
+        "immich",
+        "authentik"
       ],
-      "registryUrls": ["https://immich-app.github.io/immich-charts"]
+      "registryUrls": [
+        "https://immich-app.github.io/immich-charts",
+        "https://charts.goauthentik.io"
+      ]
     }
   ]
 }
