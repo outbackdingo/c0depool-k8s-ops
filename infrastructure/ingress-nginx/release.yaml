@@ -35,6 +35,7 @@ spec:
       service:
         annotations: 
           io.cilium/lb-ipam-ips: ${INGRESS_LB_IP}
+      dnsPolicy: "None"
       dnsConfig:
         nameservers:
           - ${DNS_SERVER}
