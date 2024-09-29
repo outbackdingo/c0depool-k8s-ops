@@ -24,6 +24,12 @@ spec:
           job:
             thumbnailGeneration:
               concurrency: 20
+          oauth:
+            enabled: true
+            issuerUrl: "https://auth.${PUBLIC_DOMAIN}/application/o/immich/"
+            clientId: "${IMMICH_CLIENT_ID}"
+            clientSecret: "${IMMICH_CLIENT_SECRET}"
+            autoLaunch: true
     postgresql:
       enabled: true
       image:
