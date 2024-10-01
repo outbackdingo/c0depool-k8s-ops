@@ -48,8 +48,8 @@ spec:
           data: |
             SEND_NTFY="YES"
             DEFAULT_RECIPIENT_NTFY="https://ntfy.${PUBLIC_DOMAIN}/netdata"
-            NTFY_USERNAME=${NTFY_USERNAME}
-            NTFY_PASSWORD=${NTFY_PASSWORD}     
+            NTFY_USERNAME="${NTFY_USERNAME}"
+            NTFY_PASSWORD="${NTFY_PASSWORD}"
         netdata:
           enabled: true
           path: /etc/netdata/netdata.conf
