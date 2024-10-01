@@ -80,7 +80,7 @@ spec:
               memory mode = dbengine
               update every = 3
             [ml]
-              enabled = no
+              enabled = yes
             [plugins]
               cgroups = no
               tc = no
