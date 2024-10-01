@@ -46,32 +46,10 @@ spec:
           enabled: true
           path: /etc/netdata/health_alarm_notify.conf
           data: |
-            SEND_CUSTOM="YES"
-            DEFAULT_RECIPIENT_CUSTOM="https://ntfy.${PUBLIC_DOMAIN}/netdata"
-            custom_sender() {
-                local msg="$host $status_message: $alarm $raised_for"
-                # map status to emoji
-                case $status in
-                  WARNING) emoji="warning" ;;
-                  CRITICAL) emoji="exclamation" ;;
-                  CLEAR) emoji="white_check_mark" ;;
-                esac
-                # map status to priority
-                case $status in
-                  WARNING) priority="high" ;;
-                  CRITICAL) priority="urgent" ;;
-                  CLEAR) priority="default" ;;
-                  *) priority="default" ;;
-                esac                
-                httpcode=$(docurl -X POST \
-                      -u "${NTFY_USERNAME}:${NTFY_PASSWORD}" \
-                      -H "Title: $name" \
-                      -H "priority: $priority" \
-                      -H "Tags: $emoji" \
-                      -d "$msg" \
-                      $1)
-            
-            }      
+            SEND_NTFY="YES"
+            DEFAULT_RECIPIENT_NTFY="https://ntfy.${PUBLIC_DOMAIN}/netdata"
+            NTFY_USERNAME=${NTFY_USERNAME}
+            NTFY_PASSWORD=${NTFY_PASSWORD}     
         netdata:
           enabled: true
           path: /etc/netdata/netdata.conf
