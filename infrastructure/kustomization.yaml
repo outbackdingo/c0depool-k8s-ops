@@ -6,6 +6,6 @@ resources:
   #- wg-easy
   - databases
   - ingress-nginx
-  # - netdata
+  - netdata
   # - intel-device-plugins
   - authentik
