@@ -43,9 +43,7 @@ spec:
             database: immich
             password: "${IMMICH_DATABASE_PASSWORD}"
       primary:
-        resources:
-          limits:
-            memory: 256Mi
+        resourcesPreset: "small"
         initdb:
           scripts:
             create-extensions.sql: |
