@@ -44,7 +44,7 @@ spec:
             password: "${IMMICH_DATABASE_PASSWORD}"
       primary:
         containerSecurityContext:
-          readOnlyRootFilesystem: true
+          readOnlyRootFilesystem: false
         initdb:
           scripts:
             create-extensions.sql: |
