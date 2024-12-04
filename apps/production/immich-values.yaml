@@ -43,8 +43,9 @@ spec:
             database: immich
             password: "${IMMICH_DATABASE_PASSWORD}"
       primary:
-        containerSecurityContext:
-          readOnlyRootFilesystem: false
+        resources:
+          limits:
+            memory: 256Mi
         initdb:
           scripts:
             create-extensions.sql: |
