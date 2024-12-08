@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-assistant
+  namespace: external-ingresses
+spec:
+  ports:
+  - name: app
+    port: 8123
+    protocol: TCP
+    targetPort: 8123
+  clusterIP: None
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: home-assistant
+  namespace: external-ingresses
+subsets:
+- addresses:
+  - ip: ${HA_SERVER}
+  ports:
+  - name: app
+    port: 8123
+    protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: home-assistant
+  namespace: external-ingresses
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: &host ha.${PUBLIC_DOMAIN}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: home-assistant
+            port:
+              number: 8123
+  tls:
+    - secretName: "${CERT_SECRET_NAME}"
+      hosts:
+        - *host
