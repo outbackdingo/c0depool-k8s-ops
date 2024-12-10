@@ -27,7 +27,7 @@ ports:
     protocol: TCP
 endpoints:
   - addresses:
-    - ip: ${DNS_SERVER}
+    - "${DNS_SERVER}"
 
 ---
 apiVersion: networking.k8s.io/v1
