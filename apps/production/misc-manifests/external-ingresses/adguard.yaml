@@ -25,7 +25,6 @@ ports:
   - name: app
     port: 443
     protocol: TCP
-    targetPort: 443
 endpoints:
   - addresses:
     - ip: ${DNS_SERVER}
