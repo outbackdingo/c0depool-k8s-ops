@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: openmediavault
+  namespace: external-ingresses
+spec:
+  ports:
+    - name: app
+      port: 443
+      protocol: TCP
+      targetPort: 443
+  clusterIP: None
+  type: ClusterIP
+
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: openmediavault-es
+  namespace: external-ingresses
+  labels:
+    kubernetes.io/service-name: openmediavault
+addressType: IPv4
+ports:
+  - name: app
+    port: 443
+    protocol: TCP
+endpoints:
+  - addresses:
+    - "${NFS_SERVER}"
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openmediavault
+  namespace: external-ingresses
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: &host omv.internal.${PUBLIC_DOMAIN}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: openmediavault
+            port:
+              number: 443
+  tls:
+    - secretName: "${CERT_SECRET_NAME}"
+      hosts:
+        - *host
