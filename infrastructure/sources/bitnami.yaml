@@ -11,5 +11,6 @@ kind: HelmRepository
 metadata:
   name: bitnami-oci
 spec:
+  type: "oci"
   interval: 5m
   url: oci://registry-1.docker.io/bitnamicharts
