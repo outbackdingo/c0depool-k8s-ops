@@ -1,4 +1,4 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: mariadb
@@ -10,7 +10,7 @@ spec:
       chart: mariadb
       version: "20.2.1"
       sourceRef:
-        kind: OCIRegistry
+        kind: HelmRepository
         name: bitnami-oci
         namespace: flux-system
   interval: 5m
