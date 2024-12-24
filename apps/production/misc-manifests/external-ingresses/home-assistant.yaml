@@ -35,6 +35,8 @@ kind: Ingress
 metadata:
   name: home-assistant
   namespace: external-ingresses
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   ingressClassName: nginx
   rules:
