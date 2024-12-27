@@ -4,7 +4,7 @@ resources:
   - ../base/jellyfin
   - ../base/filebrowser
   - ../base/vaultwarden
-  - ../base/nextcloud
+  # - ../base/nextcloud
   - ../base/c0depool-blog
   - ../base/zurg
   - ../base/immich
@@ -13,7 +13,7 @@ patchesStrategicMerge:
   - jellyfin-values.yaml
   - filebrowser-values.yaml
   - vaultwarden-values.yaml
-  - nextcloud-values.yaml
+  # - nextcloud-values.yaml
   - c0depool-blog-values.yaml
   - zurg-values.yaml
   - immich-values.yaml
