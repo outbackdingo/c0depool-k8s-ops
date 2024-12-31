@@ -124,6 +124,14 @@
         "authentik"
       ],
       "registryUrls": ["https://charts.goauthentik.io"]
+    },
+    {
+      "datasources": ["helm"],
+      "managers": ["regex"],
+      "packageNames": [
+        "cloudnative-pg"
+      ],
+      "registryUrls": ["https://cloudnative-pg.github.io/charts"]
     }
   ]
 }
