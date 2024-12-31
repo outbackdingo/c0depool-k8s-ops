@@ -4,4 +4,4 @@ namespace: databases
 resources:
   - namespace.yaml
   - mariadb
-  - cloudnative-pg
+  # - cloudnative-pg
