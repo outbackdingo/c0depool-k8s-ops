@@ -11,7 +11,10 @@ spec:
   values:
     env:
       REDIS_PASSWORD: '{{ .Values.redis.auth.password }}'
-      # DB_HOSTNAME: ${IMMICH_POSTGRES_SERVICE}
+      DB_HOSTNAME: ${IMMICH_POSTGRES_SERVICE}
+      DB_DATABASE_NAME: immich
+      DB_USERNAME: immich
+      DB_PASSWORD: ${IMMICH_DATABASE_PASSWORD}
     image:
       # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
       tag: v1.123.0
