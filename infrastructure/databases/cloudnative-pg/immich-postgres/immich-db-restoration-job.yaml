@@ -1,0 +1,71 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: immich-db-restoration-job
+  namespace: databases
+spec:
+  template:
+    spec:
+      containers:
+      - name: immich-db-restoration
+        image: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0
+        env:
+          - name: SOURCE_IMMICH_DB_HOST
+            value: immich-postgresql.immich.svc.cluster.local
+          - name: DEST_IMMICH_DB_HOST
+            value: immich-postgres-rw.databases.svc.cluster.local
+          - name: IMMICH_USER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: immich-postgres-user
+                key: password
+          - name: SUPER_USER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: immich-postgres-superuser
+                key: password
+        command:
+          - /bin/bash
+          - -c
+          - |
+            set -e
+            log() {
+              echo "$(date +"%Y-%m-%d %H:%M:%S") - $1"
+            }
+
+            log "Starting the Immich database restoration process"
+
+            if [ -z "$SOURCE_IMMICH_DB_HOST" ] || [ -z "$DEST_IMMICH_DB_HOST" ] || [ -z "$IMMICH_USER_PASSWORD" ] || [ -z "$SUPER_USER_PASSWORD" ]; then
+              log "ERROR: One or more required environment variables are missing."
+              exit 1
+            fi
+
+            log "Dumping the source database ($SOURCE_IMMICH_DB_HOST)"
+            export PGPASSWORD="${IMMICH_USER_PASSWORD}"
+            if ! pg_dumpall --database=immich --host="$SOURCE_IMMICH_DB_HOST" --username=immich --superuser=immich --no-role-passwords --clean --if-exists --file=/tmp/immich.pg_dumpall.sql; then
+              log "ERROR: Failed to dump the source database."
+              exit 1
+            fi
+            
+            log "Modifying the dump to set the search_path to 'public, pg_catalog'."
+            sed "s/SELECT pg_catalog.set_config('search_path', '', false);/SELECT pg_catalog.set_config('search_path', 'public, pg_catalog', true);/g" < /tmp/immich.pg_dumpall.sql > /tmp/immich.pg_dumpall.sql.sed
+
+            log "Restoring the dump to the destination database."
+            export PGPASSWORD="${SUPER_USER_PASSWORD}"
+            if ! psql --host="$DEST_IMMICH_DB_HOST" --username=postgres --file=/tmp/immich.pg_dumpall.sql.sed -v ON_ERROR_STOP=1; then
+              log "ERROR: Restore operation was not successful."
+              log "Removing data owned by 'immich'."
+              if ! psql --host="$DEST_IMMICH_DB_HOST" --username=postgres -c "REASSIGN OWNED BY immich TO postgres; DROP OWNED BY immich;"; then
+                log "ERROR: Failed to remove data owned by 'immich'."
+              fi
+              exit 1
+            else
+              log "Updating 'immich' user password."
+              if ! psql --host="$DEST_IMMICH_DB_HOST" --username=postgres -c "ALTER USER immich WITH PASSWORD '${IMMICH_USER_PASSWORD}';"; then
+                log "ERROR: Password update failed for 'immich'."
+                exit 1
+              fi
+              log "Restore operation completed successfully."
+            fi
+      restartPolicy: Never
+  backoffLimit: 3
