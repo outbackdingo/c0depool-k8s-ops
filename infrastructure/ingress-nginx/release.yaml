@@ -20,8 +20,8 @@ spec:
   values:
     controller:
       allowSnippetAnnotations: "true"
-      annotations-risk-level: "Critical"
       config:
+        annotations-risk-level: "Critical"
         use-forwarded-headers: "true"
         enable-real-ip: "true"
         proxy-real-ip-cidr: 10.0.0.0/8
