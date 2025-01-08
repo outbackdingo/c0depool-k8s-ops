@@ -20,6 +20,7 @@ spec:
   values:
     controller:
       allowSnippetAnnotations: "true"
+      annotations-risk-level: "Critical"
       config:
         use-forwarded-headers: "true"
         enable-real-ip: "true"
