@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: immich
-      version: "0.9.0"
+      version: "0.8.5"
   values:
     env:
       REDIS_PASSWORD: '{{ .Values.redis.auth.password }}'
@@ -17,7 +17,7 @@ spec:
       DB_PASSWORD: ${IMMICH_DATABASE_PASSWORD}
     image:
       # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
-      tag: v1.124.2
+      tag: v1.123.0
     immich:
       persistence:
         library:
@@ -34,31 +34,8 @@ spec:
             clientId: "${IMMICH_CLIENT_ID}"
             clientSecret: "${IMMICH_CLIENT_SECRET}"
             autoLaunch: true
-    # postgresql:
-    #   enabled: true
-    #   image:
-    #     repository: tensorchord/pgvecto-rs
-    #     tag: pg14-v0.2.0
-    #   global:
-    #     postgresql:
-    #       auth:
-    #         postgresPassword: "${POSTGRES_PASSWORD}"
-    #         username: immich
-    #         database: immich
-    #         password: "${IMMICH_DATABASE_PASSWORD}"
-    #   primary:
-    #     resourcesPreset: "small"
-    #     initdb:
-    #       scripts:
-    #         create-extensions.sql: |
-    #           CREATE EXTENSION cube;
-    #           CREATE EXTENSION earthdistance;
-    #           CREATE EXTENSION vectors;
-    #     persistence:
-    #       storageClass: "longhorn"
-    #       size: 10Gi
-    #   volumePermissions:
-    #     enabled: true
+            mobileOverrideEnabled: true
+            mobileRedirectUri: "https://photos.${PUBLIC_DOMAIN}/api/oauth/mobile-redirect"
 
     redis:
       enabled: true
