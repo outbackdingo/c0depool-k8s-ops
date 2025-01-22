@@ -34,31 +34,31 @@ spec:
             clientId: "${IMMICH_CLIENT_ID}"
             clientSecret: "${IMMICH_CLIENT_SECRET}"
             autoLaunch: true
-    postgresql:
-      enabled: true
-      image:
-        repository: tensorchord/pgvecto-rs
-        tag: pg14-v0.2.0
-      global:
-        postgresql:
-          auth:
-            postgresPassword: "${POSTGRES_PASSWORD}"
-            username: immich
-            database: immich
-            password: "${IMMICH_DATABASE_PASSWORD}"
-      primary:
-        resourcesPreset: "small"
-        initdb:
-          scripts:
-            create-extensions.sql: |
-              CREATE EXTENSION cube;
-              CREATE EXTENSION earthdistance;
-              CREATE EXTENSION vectors;
-        persistence:
-          storageClass: "longhorn"
-          size: 10Gi
-      volumePermissions:
-        enabled: true
+    # postgresql:
+    #   enabled: true
+    #   image:
+    #     repository: tensorchord/pgvecto-rs
+    #     tag: pg14-v0.2.0
+    #   global:
+    #     postgresql:
+    #       auth:
+    #         postgresPassword: "${POSTGRES_PASSWORD}"
+    #         username: immich
+    #         database: immich
+    #         password: "${IMMICH_DATABASE_PASSWORD}"
+    #   primary:
+    #     resourcesPreset: "small"
+    #     initdb:
+    #       scripts:
+    #         create-extensions.sql: |
+    #           CREATE EXTENSION cube;
+    #           CREATE EXTENSION earthdistance;
+    #           CREATE EXTENSION vectors;
+    #     persistence:
+    #       storageClass: "longhorn"
+    #       size: 10Gi
+    #   volumePermissions:
+    #     enabled: true
 
     redis:
       enabled: true
