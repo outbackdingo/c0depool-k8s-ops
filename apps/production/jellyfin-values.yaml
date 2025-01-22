@@ -49,14 +49,14 @@ spec:
         type: nfs
         server: "${NFS_SERVER}"
         path: /media/
-      media-zurg:
-        enabled: true
-        type: nfs
-        server: "${NFS_SERVER}"
-        path: /zurg/
-        globalMounts:
-          - path: /media-zurg
-            readOnly: true
+      # media-zurg:
+      #   enabled: true
+      #   type: nfs
+      #   server: "${NFS_SERVER}"
+      #   path: /zurg/
+      #   globalMounts:
+      #     - path: /media-zurg
+      #       readOnly: true
     ingress:
       main:
         enabled: true
