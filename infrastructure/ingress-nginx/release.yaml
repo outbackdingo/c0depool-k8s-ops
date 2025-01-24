@@ -25,6 +25,7 @@ spec:
         strict-validate-path-type: "false"
         use-forwarded-headers: "true"
         enable-real-ip: "true"
+        compute-full-forwarded-for: "true"
         proxy-real-ip-cidr: 10.0.0.0/8,192.168.0.0/24
         custom-http-errors: >-
           403,404,500,501,502,503
