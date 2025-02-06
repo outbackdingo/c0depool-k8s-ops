@@ -77,8 +77,8 @@ spec:
       # nodeSelector:
       #   intel.feature.node.kubernetes.io/gpu: "true"
       securityContext:
-        # runAsUser: 568
-        runAsGroup: 100
+        runAsUser: 1000
+        runAsGroup: 1000
     #     fsGroup: 568
     #     supplementalGroups:
     #       - 44
