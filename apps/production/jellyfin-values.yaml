@@ -73,12 +73,12 @@ spec:
           - secretName: "${CERT_SECRET_NAME}"
             hosts:
             - *host
-    # defaultPodOptions:
-    #   nodeSelector:
-    #     intel.feature.node.kubernetes.io/gpu: "true"
-    #   securityContext:
-    #     runAsUser: 568
-    #     runAsGroup: 568
+    defaultPodOptions:
+      # nodeSelector:
+      #   intel.feature.node.kubernetes.io/gpu: "true"
+      securityContext:
+        # runAsUser: 568
+        runAsGroup: 100
     #     fsGroup: 568
     #     supplementalGroups:
     #       - 44
