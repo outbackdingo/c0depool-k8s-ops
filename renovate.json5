@@ -5,13 +5,13 @@
   ],
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "flux": {
-    "fileMatch": ["cluster/.+\\.ya?ml$"]
+    "fileMatch": ["clusters/.+\\.ya?ml$"]
   },
   "helm-values": {
-    "fileMatch": ["cluster/.+\\.ya?ml$","apps/.+\\.ya?ml$","infrastructure/.+\\.ya?ml$"]
+    "fileMatch": ["clusters/.+\\.ya?ml$","apps/.+\\.ya?ml$","infrastructure/.+\\.ya?ml$"]
   },
   "kubernetes": {
-    "fileMatch": ["cluster/.+\\.ya?ml$","apps/.+\\.ya?ml$","infrastructure/.+\\.ya?ml$"]
+    "fileMatch": ["clusters/.+\\.ya?ml$","apps/.+\\.ya?ml$","infrastructure/.+\\.ya?ml$"]
   },
   "regexManagers": [
     {
