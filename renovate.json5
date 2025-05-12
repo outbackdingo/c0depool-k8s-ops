@@ -71,7 +71,7 @@
       "packageNames": [
         "app-template"
       ],
-      "registryUrls": ["https://bjw-s.github.io/helm-charts/"]
+      "registryUrls": ["https://bjw-s-labs.github.io/helm-charts/"]
     },
     {
       "datasources": ["helm"],
