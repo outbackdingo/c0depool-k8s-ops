@@ -24,7 +24,7 @@ spec:
           main:
             image:
               repository: ghcr.io/c0depool/wireguard
-              tag: v1.0.20210914
+              tag: v1.0.20250521
               pullPolicy: Always
             env:
               TZ: "${TIMEZONE}"
