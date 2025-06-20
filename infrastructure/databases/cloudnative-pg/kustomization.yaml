@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: databases
 resources:
   - release.yaml
-  # - immich-postgres
+  - immich-postgres

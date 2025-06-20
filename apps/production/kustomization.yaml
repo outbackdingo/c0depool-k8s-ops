@@ -7,7 +7,7 @@ resources:
   - ../base/nextcloud
   - ../base/c0depool-blog
   # - ../base/zurg
-  # - ../base/immich
+  - ../base/immich
   - misc-manifests
 patchesStrategicMerge:
   # - jellyfin-values.yaml
@@ -16,4 +16,4 @@ patchesStrategicMerge:
   - nextcloud-values.yaml
   - c0depool-blog-values.yaml
   # - zurg-values.yaml
-  # - immich-values.yaml
+  - immich-values.yaml
