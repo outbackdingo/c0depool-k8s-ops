@@ -14,3 +14,4 @@ resources:
   - immich.yaml
   - goauthentik.yaml
   - cnpg.yaml
+  - emberstack.yaml
