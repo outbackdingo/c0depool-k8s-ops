@@ -8,7 +8,7 @@ resources:
   - ../base/c0depool-blog
   # - ../base/zurg
   # - ../base/immich
-  # - misc-manifests
+  - misc-manifests
 patchesStrategicMerge:
   # - jellyfin-values.yaml
   # - filebrowser-values.yaml
