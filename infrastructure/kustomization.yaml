@@ -4,8 +4,8 @@ resources:
   - sources
   - wireguard
   #- wg-easy
-  - databases
+  # - databases
   - ingress-nginx
   # - netdata
   # - intel-device-plugins
-  - authentik
+  # - authentik
