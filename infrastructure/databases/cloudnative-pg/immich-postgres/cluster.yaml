@@ -4,7 +4,7 @@ metadata:
   name: immich-postgres
   namespace: databases
 spec:
-  # renovate: datasource=docker depName=ghcr.io/tensorchord/cloudnative-pgvecto.rs
+  # renovate: datasource=docker depName=ghcr.io/tensorchord/cloudnative-vectorchord
   imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.9-0.3.0
   instances: 1
   postgresql:
@@ -24,11 +24,6 @@ spec:
       owner: immich
       secret:
         name: immich-postgres-user
-  #     postInitSQL:
-  #       - ALTER SYSTEM SET search_path TO "$user", public, vectors;
-  #       - CREATE EXTENSION IF NOT EXISTS "vectors";
-  #       - CREATE EXTENSION IF NOT EXISTS "cube" CASCADE;
-  #       - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
   storage:
     size: 10Gi
     storageClass: longhorn
@@ -53,39 +48,3 @@ spec:
       ensure: present
     - name: vectors
       ensure: absent
-
-
-# apiVersion: postgresql.cnpg.io/v1
-# kind: Cluster
-# metadata:
-#   name: immich-postgres
-#   namespace: databases
-# spec:
-#   # renovate: datasource=docker depName=ghcr.io/tensorchord/cloudnative-pgvecto.rs
-#   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:16.5-v0.3.0
-#   instances: 1
-#   postgresql:
-#     shared_preload_libraries:
-#       - "vectors.so"
-#   enableSuperuserAccess: true
-#   superuserSecret: 
-#     name: immich-postgres-superuser
-#   managed:
-#     roles:
-#       - name: immich
-#         superuser: true
-#         login: true
-#   bootstrap:
-#     initdb:
-#       database: immich
-#       owner: immich
-#       secret:
-#         name: immich-postgres-user
-#       postInitSQL:
-#         - ALTER SYSTEM SET search_path TO "$user", public, vectors;
-#         - CREATE EXTENSION IF NOT EXISTS "vectors";
-#         - CREATE EXTENSION IF NOT EXISTS "cube" CASCADE;
-#         - CREATE EXTENSION IF NOT EXISTS "earthdistance" CASCADE;
-#   storage:
-#     size: 10Gi
-#     storageClass: longhorn
