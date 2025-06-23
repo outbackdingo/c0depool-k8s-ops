@@ -10,14 +10,14 @@ spec:
   postgresql:
     shared_preload_libraries:
       - "vectors.so"
-  enableSuperuserAccess: true
-  superuserSecret: 
-    name: immich-postgres-superuser
-  managed:
-    roles:
-      - name: immich
-        superuser: true
-        login: true
+  # enableSuperuserAccess: true
+  # superuserSecret: 
+  #   name: immich-postgres-superuser
+  # managed:
+  #   roles:
+  #     - name: immich
+  #       superuser: true
+  #       login: true
   # bootstrap:
   #   initdb:
   #     database: immich
