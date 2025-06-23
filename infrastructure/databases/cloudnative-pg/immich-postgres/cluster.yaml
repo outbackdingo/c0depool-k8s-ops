@@ -9,21 +9,21 @@ spec:
   instances: 1
   postgresql:
     shared_preload_libraries:
-      - "vectors.so"
-  # enableSuperuserAccess: true
-  # superuserSecret: 
-  #   name: immich-postgres-superuser
-  # managed:
-  #   roles:
-  #     - name: immich
-  #       superuser: true
-  #       login: true
-  # bootstrap:
-  #   initdb:
-  #     database: immich
-  #     owner: immich
-  #     secret:
-  #       name: immich-postgres-user
+      - "vchord.so"
+  enableSuperuserAccess: true
+  superuserSecret: 
+    name: immich-postgres-superuser
+  managed:
+    roles:
+      - name: immich
+        superuser: true
+        login: true
+  bootstrap:
+    initdb:
+      database: immich
+      owner: immich
+      secret:
+        name: immich-postgres-user
   #     postInitSQL:
   #       - ALTER SYSTEM SET search_path TO "$user", public, vectors;
   #       - CREATE EXTENSION IF NOT EXISTS "vectors";
