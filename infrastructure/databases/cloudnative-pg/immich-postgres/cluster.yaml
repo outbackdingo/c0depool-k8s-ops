@@ -51,6 +51,8 @@ spec:
       version: 0.3.0
     - name: earthdistance
       ensure: present
+    - name: vectors
+      ensure: absent
 
 
 # apiVersion: postgresql.cnpg.io/v1
