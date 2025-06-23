@@ -33,24 +33,24 @@ spec:
     size: 10Gi
     storageClass: longhorn
 
-# ---
-# apiVersion: postgresql.cnpg.io/v1
-# kind: Database
-# metadata:
-#   name: immich
-# spec:
-#   name: immich
-#   owner: immich
-#   cluster:
-#     name: immich-postgres
-#   extensions:
-#     - name: vector
-#       ensure: present
-#     - name: vchord
-#       ensure: present
-#       version: 0.3.0
-#     - name: earthdistance
-#       ensure: present
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: immich
+spec:
+  name: immich
+  owner: immich
+  cluster:
+    name: immich-postgres
+  extensions:
+    - name: vector
+      ensure: present
+    - name: vchord
+      ensure: present
+      version: 0.3.0
+    - name: earthdistance
+      ensure: present
 
 
 # apiVersion: postgresql.cnpg.io/v1
