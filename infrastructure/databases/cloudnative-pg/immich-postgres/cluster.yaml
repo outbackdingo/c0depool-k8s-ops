@@ -42,7 +42,6 @@ spec:
       ensure: present
     - name: vchord
       ensure: present
-      version: 0.3.0
     - name: earthdistance
       ensure: present
     - name: vectors
