@@ -60,7 +60,7 @@
         '/infrastructure/.+\\.ya?ml$/',
       ],
       matchStrings: [
-        'datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n.+: (&\\S+\\s)?(?<currentValue>\\S+)',
+        'datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(\\s+repository=(?<registryUrl>\\S+))?\\n.+:\\s+(&\\S+\\s)?[\\"']?(?<currentValue>[^\\s\\"']+)[\\"']?',
         'datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n.+/(?<currentValue>(v|\\d)[^/]+)',
       ],
       datasourceTemplate: '{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}',
