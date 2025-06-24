@@ -8,7 +8,6 @@ spec:
   chart:
     spec:
       chart: reflector
-      # renovate: datasource=github-releases depName=oci://ghcr.io/emberstack/helm-charts/
       version: "9.1.12"
       sourceRef:
         kind: HelmRepository
