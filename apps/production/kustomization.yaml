@@ -8,6 +8,7 @@ resources:
   - ../base/c0depool-blog
   # - ../base/zurg
   - ../base/immich
+  - ../base/arr-stack
   - misc-manifests
 patchesStrategicMerge:
   - jellyfin-values.yaml
@@ -17,3 +18,4 @@ patchesStrategicMerge:
   - c0depool-blog-values.yaml
   # - zurg-values.yaml
   - immich-values.yaml
+  - arr-stack-values.yaml
