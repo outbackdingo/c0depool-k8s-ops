@@ -211,19 +211,5 @@
         'https://cloudnative-pg.github.io/charts',
       ],
     },
-    {
-      matchDatasources: [
-        'helm',
-      ],
-      matchManagers: [
-        'custom.regex',
-      ],
-      matchPackageNames: [
-        'reflector',
-      ],
-      registryUrls: [
-        'oci://ghcr.io/emberstack/helm-charts/',
-      ],
-    },
   ],
 }
