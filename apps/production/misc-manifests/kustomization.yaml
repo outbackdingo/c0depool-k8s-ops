@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - external-ingresses
   - immich-pvc.yaml
+  - observability-proxies.yaml
