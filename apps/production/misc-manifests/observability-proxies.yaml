@@ -37,6 +37,7 @@ spec:
           - loki.internal.${PUBLIC_DOMAIN}
 
 # Prometheus
+---
 apiVersion: v1
 kind: Service
 metadata:
