@@ -48,6 +48,8 @@ spec:
         - secretName: "${CERT_SECRET_NAME}"
           hosts:
             - &host "nextcloud.${PUBLIC_DOMAIN}"
+    cronjob:
+      enabled: true
     phpClientHttpsFix:
       enabled: true
     nextcloud:
