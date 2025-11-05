@@ -7,17 +7,20 @@ spec:
   chart:
     spec:
       chart: immich
-      version: "0.9.3"
+      version: "0.10.1"
   values:
-    env:
-      REDIS_PASSWORD: '{{ .Values.redis.auth.password }}'
-      DB_HOSTNAME: ${IMMICH_POSTGRES_SERVICE}
-      DB_DATABASE_NAME: immich
-      DB_USERNAME: immich
-      DB_PASSWORD: ${IMMICH_DATABASE_PASSWORD}
-    image:
-      # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
-      tag: v2.2.1
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              DB_HOSTNAME: ${IMMICH_POSTGRES_SERVICE}
+              DB_DATABASE_NAME: immich
+              DB_USERNAME: immich
+              DB_PASSWORD: ${IMMICH_DATABASE_PASSWORD}
+            image:
+              # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
+              tag: v2.2.1
     immich:
       persistence:
         library:
@@ -37,38 +40,38 @@ spec:
             mobileOverrideEnabled: true
             mobileRedirectUri: "https://photos.${PUBLIC_DOMAIN}/api/oauth/mobile-redirect"
 
-    redis:
+    valkey:
       enabled: true
-      architecture: standalone
-      auth:
-        enabled: true
-        password: "${REDIS_AUTH}"
-      master:
-        persistence:
+      persistence:
+        data:
+          enabled: true
           storageClass: "longhorn"
-      replica:
-        persistence:
-          storageClass: "longhorn"
+
     server:
       enabled: true
-      image:
-        repository: ghcr.io/immich-app/immich-server
-        pullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: 4096Mi
-        requests:
-          cpu: 200m
-          memory: 256Mi
+      controllers:
+        main:
+          containers:
+            main:
+              resources:
+                limits:
+                  memory: 4096Mi
+                requests:
+                  cpu: 200m
+                  memory: 256Mi
       ingress:
         main:
           enabled: true
-          ingressClassName: nginx
+          className: nginx
           hosts:
             - host: &host "photos.${PUBLIC_DOMAIN}"
               paths:
-                - path: "/"
-          tls:
+                - path: /
+                  pathType: Prefix
+                  service:            
+                    identifier: main
+                    port: http
+          tls: 
             - secretName: "${CERT_SECRET_NAME}"
               hosts:
               - *host
@@ -79,42 +82,24 @@ spec:
           server: "${NFS_SERVER}"
           path: /media/Photos/dslr
           readOnly: true
-    microservices:
-      enabled: true
-      image:
-        repository: ghcr.io/immich-app/immich-server
-        pullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: 4096Mi
-        requests:
-          cpu: 200m
-          memory: 256Mi
-      persistence:
-        ext-dslr-ro:
-          enabled: true
-          type: nfs
-          server: "${NFS_SERVER}"
-          path: /media/Photos/dslr
-          readOnly: true
+          
     machine-learning:
       enabled: true
-      image:
-        repository: ghcr.io/immich-app/immich-machine-learning
-        pullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: 4096Mi
-        requests:
-          cpu: 200m
-          memory: 256Mi
-      env:
-        TRANSFORMERS_CACHE: /cache
+      controllers:
+        main:
+          containers:
+            main:
+              resources:
+                limits:
+                  memory: 4096Mi
+                requests:
+                  cpu: 200m
+                  memory: 256Mi
       persistence:
         cache:
           enabled: true
           size: 10Gi
-          type: pvc
+          type: persistentVolumeClaim
           accessMode: ReadWriteMany
           storageClass: "longhorn"
 
