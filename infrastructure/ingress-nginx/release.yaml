@@ -48,6 +48,5 @@ spec:
         value: ghost
       - name: SHOW_DETAILS
         value: "false"
-    tcp: 
-      "9999": "zurg/zurg:9999"
-      "3306": "databases/mariadb:3306"
+    tcp:
+      "3306": "databases/mariadb-cluster:3306"
