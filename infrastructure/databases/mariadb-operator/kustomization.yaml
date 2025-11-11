@@ -5,3 +5,4 @@ resources:
   - secrets.yaml
   - crds-release.yaml
   - operator-release.yaml
+  - cluster-release.yaml
