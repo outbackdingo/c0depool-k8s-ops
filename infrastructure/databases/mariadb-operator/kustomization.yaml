@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: databases
 resources:
   - crds-release.yaml
+  - operator-release.yaml
