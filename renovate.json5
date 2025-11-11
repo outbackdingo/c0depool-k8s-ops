@@ -211,5 +211,21 @@
         'https://cloudnative-pg.github.io/charts',
       ],
     },
+    {
+      matchDatasources: [
+        'helm',
+      ],
+      matchManagers: [
+        'custom.regex',
+      ],
+      matchPackageNames: [
+        'mariadb-operator-crds',
+        'mariadb-operator',
+        'mariadb-cluster',
+      ],
+      registryUrls: [
+        'https://helm.mariadb.com/mariadb-operator',
+      ],
+    },
   ],
 }
