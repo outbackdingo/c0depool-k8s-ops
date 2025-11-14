@@ -30,6 +30,16 @@ spec:
               PUID: "1000"
               PGID: "1000"
               TZ: "${TIMEZONE}"
+      lidarr:
+        containers:
+          lidarr:
+            image:
+              repository: lscr.io/linuxserver/lidarr
+              tag: "3.0.1"
+            env:
+              PUID: "1000"
+              PGID: "1000"
+              TZ: "${TIMEZONE}"
       bazarr:
         containers:
           bazarr:
@@ -85,6 +95,12 @@ spec:
         ports:
           http:
             port: 8989
+      lidarr:
+        controller: lidarr
+        type: ClusterIP
+        ports:
+          http:
+            port: 8686
       bazarr:
         controller: bazarr
         type: ClusterIP
@@ -128,6 +144,15 @@ spec:
         advancedMounts:
           sonarr:
             sonarr:
+              - path: /config
+      lidarr-config:
+        enabled: true
+        storageClass: longhorn
+        size: 1Gi
+        accessMode: ReadWriteOnce
+        advancedMounts:
+          lidarr:
+            lidarr:
               - path: /config
       bazarr-config:
         enabled: true
@@ -191,6 +216,20 @@ spec:
           - secretName: ${CERT_SECRET_NAME}
             hosts:
             - *sonarr
+      lidarr:
+        className: "nginx"
+        hosts:
+          - host: &lidarr lidarr.internal.${PUBLIC_DOMAIN}
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: lidarr
+                  port: http
+        tls:
+          - secretName: ${CERT_SECRET_NAME}
+            hosts:
+            - *lidarr
       bazarr:
         className: "nginx"
         hosts:
